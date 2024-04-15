@@ -5,13 +5,16 @@
     <color name="rojo">#FB0000</color>
     <color name="azul">#2196F3</color>
     <color name="amarillo">#FFEB3B</color>
-    <color name="naranja">#EF673C</color>
+    <color name="naranja">#8F4933</color>
     <color name="rosa">#F15D8F</color>
     <color name="verde">#306E35</color>
     <color name="marron">#2C2114</color>
     <color name="azulCielo">#76FFFA</color>
     <color name="rojoOscuro">#2C0000</color>
     <color name="azulOscuro">#020037</color>
+    <color name="grisClaro">#C6C6C6</color>
+    <color name="grisOscuro">#424242</color>
+
 
 
 </resources>
