@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:background="@color/azulOscuro">
+
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/azul"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="150dp"
+        app:cardCornerRadius="16dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvUsuario"
+                android:textColor="@color/azulOscuro"
+                android:text="@string/strUsuario"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtUsuario"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsuario"
+                app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </androidx.appcompat.widget.AppCompatEditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvContrasena"
+                android:textColor="@color/azulOscuro"
+                android:text="@string/strContrasena"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/txtUsuario"
+                app:layout_constraintBottom_toTopOf="@+id/txtContrasena"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtContrasena"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tvContrasena"
+                app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
+                android:inputType="textPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </androidx.appcompat.widget.AppCompatEditText>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnIniciarSesion"
+                app:layout_constraintTop_toBottomOf="@id/txtContrasena"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCrearCuenta"
+                android:text="@string/btnIniciarSesion"
+                android:backgroundTint="@color/amarillo"
+                android:textColor="@color/marron"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCrearCuenta"
+                app:layout_constraintTop_toBottomOf="@id/txtContrasena"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnIniciarSesion"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/btnCrearCuenta"
+                android:backgroundTint="@color/amarillo"
+                android:textColor="@color/marron"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

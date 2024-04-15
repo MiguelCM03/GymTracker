@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GymTracker</string>
+    <string name="helloWorld">Hello World</string>
+    <string name="btnIniciarSesion">Iniciar sesión</string>
+    <string name="btnCrearCuenta">Crear cuenta</string>
+    <string name="strUsuario">Introduce tu usuario</string>
+    <string name="strContrasena">Introduce tu contraseña</string>
+</resources>
