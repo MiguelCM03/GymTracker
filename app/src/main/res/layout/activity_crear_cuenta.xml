@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearCuentaActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:background="@color/grisOscuro"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CrearCuentaActivity"
     >
     <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/grisClaro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
@@ -21,62 +22,73 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/grisClaro"
             >
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvNombreUsuario"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopof="@id/etUsuario"
-                android:text="Introduce tu nombre de usuario"
+                android:id="@+id/tvUsuario"
                 android:textColor="@color/negro"
-                />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/etUsuario"
+                android:text="@string/strEstableceUsuario"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNombreUsuario"
+                >
+            </TextView>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsuario"
                 app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </androidx.appcompat.widget.AppCompatEditText>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvContrasena"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etUsuario"
-                app:layout_constraintBottom_toTopOf="@id/etContrasena"
-                android:text="Introduce tu nombre de usuario"
                 android:textColor="@color/negro"
-                />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/etContrasena"
+                android:text="@string/strEstableceContrasena"
+                app:layout_constraintTop_toBottomOf="@+id/txtUsuario"
+                app:layout_constraintBottom_toTopOf="@+id/txtContrasena"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvContrasena"
-                app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-                />
+                >
+            </TextView>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtContrasena"
+                app:layout_constraintTop_toBottomOf="@id/tvContrasena"
+                app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
+                android:inputType="textPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </androidx.appcompat.widget.AppCompatEditText>
 
             <Button
+                android:id="@+id/btnIniciarSesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnSubmit"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etContrasena"
+                android:backgroundTint="@color/amarillo"
+                android:onClick="insertarDatos"
+                android:text="@string/strConfirmar"
+                android:textColor="@color/marron"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtContrasena" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

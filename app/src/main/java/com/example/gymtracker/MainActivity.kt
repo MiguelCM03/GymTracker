@@ -1,7 +1,9 @@
 package com.example.gymtracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    var txtUsuario:EditText? = null
-    var txtContrasena:EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,11 +21,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        txtUsuario = findViewById(R.id.txtUsuario)
-        txtContrasena = findViewById(R.id.txtContrasena)
+        val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
+        btnCrearCuenta.setOnClickListener{actCrearCuenta()}
     }
-    fun insertarDatos(view:View){
 
+    fun actCrearCuenta(){
+        val intent = Intent(this, CrearCuentaActivity::class.java)
+        startActivity(intent)
     }
 }
