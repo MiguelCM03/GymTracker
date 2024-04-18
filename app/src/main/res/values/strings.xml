@@ -5,8 +5,10 @@
     <string name="btnCrearCuenta">Crear cuenta</string>
     <string name="strUsuario">Introduce tu usuario</string>
     <string name="strContrasena">Introduce tu contraseña</string>
-    <string name="strEstableceUsuario">Establece tu nombre de usuario:</string>
-    <string name="strEstableceContrasena">Establece tu contraseña</string>
+    <string name="strEstableceCorreo">Establece tu correo:</string>
+    <string name="strEstableceContrasena">Establece tu contraseña:</string>
     <string name="strConfirmar">Confirmar</string>
     <string name="title_activity_crear_cuenta">crearCuentaActivity</string>
+    <string name="strNoTienesCuenta">Aun no tienes una cuenta? Crea una aquí</string>
+
 </resources>

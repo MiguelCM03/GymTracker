@@ -37,6 +37,7 @@ class CrearCuentaActivity : AppCompatActivity() {
             var registro = ContentValues()
             registro.put("wsNombre", wsNombre)
             registro.put("wsContrasena", wsContrasena)
+            baseDatos.execSQL("SELECT * from USERS where UPPER(nombre) like UPPER()")
             baseDatos.insert("USERS", null, registro)
             txtContrasena?.setText("")
             txtUsuario?.setText("")
@@ -45,6 +46,6 @@ class CrearCuentaActivity : AppCompatActivity() {
             Toast.makeText(this, "Campos vacíos", Toast.LENGTH_LONG).show()
         }
 
-    }
+    }//insertarDatos()
 
-}
+}//CrearCuentaActivity

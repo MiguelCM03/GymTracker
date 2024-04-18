@@ -81,23 +81,26 @@
                 app:layout_constraintTop_toBottomOf="@id/txtContrasena"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnCrearCuenta"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="35dp"
                 android:text="@string/btnIniciarSesion"
                 android:backgroundTint="@color/amarillo"
                 android:textColor="@color/marron"
                 />
 
-            <Button
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnCrearCuenta"
-                app:layout_constraintTop_toBottomOf="@id/txtContrasena"
+                android:id="@+id/txtCrearCuenta"
+                app:layout_constraintTop_toBottomOf="@id/btnIniciarSesion"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnIniciarSesion"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/btnCrearCuenta"
-                android:backgroundTint="@color/amarillo"
-                android:textColor="@color/marron"
+                android:layout_marginBottom="25dp"
+                android:text="@string/strNoTienesCuenta"
+                android:textColor="@color/azulOscuro"
+                android:textStyle="bold"
                 />
 
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,11 +23,20 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
+        val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
+        val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         btnCrearCuenta.setOnClickListener{actCrearCuenta()}
+        txtCrearCuenta.setOnClickListener{actCrearCuenta()}
+        btnIniciarSesion.setOnClickListener{clickIniciarSesion()}
     }
 
     fun actCrearCuenta(){
         val intent = Intent(this, CrearCuentaActivity::class.java)
         startActivity(intent)
+    }
+    fun clickIniciarSesion(){
+        if(txtContrasena?.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD){txtContrasena?.inputType = android.text.InputType.TYPE_CLASS_TEXT}
+        else{txtContrasena?.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD}
+
     }
 }

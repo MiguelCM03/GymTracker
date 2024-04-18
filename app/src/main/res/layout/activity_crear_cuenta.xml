@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvUsuario"
                 android:textColor="@color/negro"
-                android:text="@string/strEstableceUsuario"
+                android:text="@string/strEstableceCorreo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
                 app:layout_constraintStart_toStartOf="parent"
