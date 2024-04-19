@@ -2,9 +2,7 @@ package com.example.gymtracker
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,15 +20,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
-        btnCrearCuenta.setOnClickListener{actCrearCuenta()}
-        txtCrearCuenta.setOnClickListener{actCrearCuenta()}
+        txtCrearCuenta.setOnClickListener{clickCrearCuenta()}
         btnIniciarSesion.setOnClickListener{clickIniciarSesion()}
     }
 
-    fun actCrearCuenta(){
+    fun clickCrearCuenta(){
         val intent = Intent(this, CrearCuentaActivity::class.java)
         startActivity(intent)
     }
