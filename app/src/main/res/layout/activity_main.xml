@@ -30,7 +30,7 @@
                 android:textColor="@color/azulOscuro"
                 android:text="@string/strUsuario"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/txtUsuario"
+                app:layout_constraintBottom_toTopOf="@+id/txtCorreo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
@@ -40,7 +40,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtUsuario"
+                android:id="@+id/txtCorreo"
                 app:layout_constraintTop_toBottomOf="@+id/tvUsuario"
                 app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:id="@+id/tvContrasena"
                 android:textColor="@color/azulOscuro"
                 android:text="@string/strContrasena"
-                app:layout_constraintTop_toBottomOf="@+id/txtUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/txtCorreo"
                 app:layout_constraintBottom_toTopOf="@+id/txtContrasena"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
