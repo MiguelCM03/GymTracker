@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    android:background="@color/grisOscuro"
+    android:background="@color/moradoOscuro"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CrearCuentaActivity"
     >
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/grisClaro"
+        android:backgroundTint="@color/moradoClaro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         app:cardCornerRadius="16dp"
         >
 
@@ -28,70 +28,75 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvUsuario"
-                android:textColor="@color/negro"
+                android:id="@+id/tvAno"
                 android:text="@string/strEstableceCorreo"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/tilCorreo"
+                app:layout_constraintBottom_toTopOf="@+id/spAnos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/negro"
                 >
             </TextView>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200dp"
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvUsuario"
-                app:layout_constraintBottom_toTopOf="@+id/tvContrasena"
-                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/spAnos"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:hint="Correo"
-                android:id="@+id/tilCorreo"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCorreoNuevo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ems="15"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAno"
+                app:layout_constraintBottom_toTopOf="@id/tvMes"
+                android:entries="@array/spAnos"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvContrasena"
+                android:id="@+id/tvMes"
                 android:textColor="@color/negro"
-                android:text="@string/strEstableceContrasena"
-                app:layout_constraintTop_toBottomOf="@+id/tilCorreo"
-                app:layout_constraintBottom_toTopOf="@+id/tilContrasena"
+                android:text="@string/strEstableceCorreo"
+                app:layout_constraintTop_toBottomOf="@id/spAnos"
+                app:layout_constraintBottom_toTopOf="@+id/spMeses"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
             </TextView>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200dp"
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                android:id="@+id/tilContrasena"
-                app:passwordToggleEnabled="true"
-                app:layout_constraintTop_toBottomOf="@id/tvContrasena"
-                app:layout_constraintBottom_toTopOf="@+id/btnConfirmar"
+                android:id="@+id/spMeses"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMes"
+                app:layout_constraintBottom_toTopOf="@id/tvGrupo"
+                android:entries="@array/spMeses"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvGrupo"
+                android:textColor="@color/negro"
+                android:text="@string/strEstableceContrasena"
+                app:layout_constraintTop_toBottomOf="@+id/spMeses"
+                app:layout_constraintBottom_toTopOf="@+id/spGrupos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
+            </TextView>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtContrasenaNueva"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:ems="15"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spGrupos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGrupo"
+                app:layout_constraintBottom_toTopOf="@id/btnConfirmar"
+                android:entries="@array/spGrupos"
+                />
 
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnConfirmar"
@@ -100,11 +105,11 @@
                 android:backgroundTint="@color/amarillo"
                 android:onClick="insertarDatos"
                 android:text="@string/strConfirmar"
-                android:textColor="@color/marron"
+                android:textColor="@color/moradoOscuro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilContrasena" />
+                app:layout_constraintTop_toBottomOf="@id/spGrupos" />
 
 
 

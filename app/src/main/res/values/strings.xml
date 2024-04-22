@@ -10,5 +10,45 @@
     <string name="strConfirmar">Confirmar</string>
     <string name="title_activity_crear_cuenta">crearCuentaActivity</string>
     <string name="strNoTienesCuenta">Aun no tienes una cuenta? Crea una aquí</string>
+    <string name="strEligeAno">Selecciona un año:</string>
+    <string name="strEligeGrupo">Selecciona un grupo muscular:</string>
+    <string name="strEligeMes">Selecciona un mes:</string>
+    <string-array name="spMeses">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Septiembre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+    <string-array name="spAnos">
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+    </string-array>
+    <string-array name="spGrupos">
+        <item>Brazo</item>
+        <item>Pierna</item>
+        <item>Torso</item>
+        <item>Cardio</item>
+        <item>Abdomen</item>
+    </string-array>
 
 </resources>

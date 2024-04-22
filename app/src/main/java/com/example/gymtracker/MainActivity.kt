@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun clickIniciarSesion(){
-        if(txtContrasena?.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD){txtContrasena?.inputType = android.text.InputType.TYPE_CLASS_TEXT}
-        else{txtContrasena?.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD}
-
+        val intent = Intent(this, SeleccionarFechaGrupoActivity::class.java)
+        startActivity(intent)
     }
 }
