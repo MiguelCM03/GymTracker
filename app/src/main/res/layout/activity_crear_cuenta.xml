@@ -50,7 +50,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCorreoNuevo"
+                    android:id="@+id/txtCorreoCrearCuenta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="15"/>
@@ -85,7 +85,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtContrasenaNueva"
+                    android:id="@+id/txtContrasenaCrearCuenta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword"

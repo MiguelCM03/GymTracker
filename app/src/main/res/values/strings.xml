@@ -50,5 +50,8 @@
         <item>Cardio</item>
         <item>Abdomen</item>
     </string-array>
+    <string name="eleccion">Selecciona lo que quieres hacer:</string>
+    <string name="strConsultarDatos">Consultar datos</string>
+    <string name="strInsertarDatos">Insertar datos</string>
 
 </resources>

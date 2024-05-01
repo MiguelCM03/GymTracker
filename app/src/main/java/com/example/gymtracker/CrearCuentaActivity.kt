@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -15,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
-var txtCorreoNuevo: EditText? = null
+var txtCorreoNuevo: TextInputEditText? = null
 var txtContrasenaNueva: TextInputEditText? = null
 class CrearCuentaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +27,8 @@ class CrearCuentaActivity : AppCompatActivity() {
             insets
         }
 
-        txtContrasenaNueva = findViewById(R.id.txtContrasenaNueva)
-        txtCorreoNuevo = findViewById(R.id.txtCorreoNuevo)
+        txtContrasenaNueva = findViewById(R.id.txtContrasenaCrearCuenta)
+        txtCorreoNuevo = findViewById(R.id.txtCorreoCrearCuenta)
         var btnConfirmar = findViewById<Button>(R.id.btnConfirmar)
         btnConfirmar.setOnClickListener{
             /*if(*/

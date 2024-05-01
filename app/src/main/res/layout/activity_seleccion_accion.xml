@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:background="@color/verdeOscuro"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CrearCuentaActivity"
+    >
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/verdeClaro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="150dp"
+        app:cardCornerRadius="16dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEleccion"
+                android:textColor="@color/negro"
+                android:text="@string/eleccion"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btnInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+
+            <Button
+                android:id="@+id/btnInsertar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/moradoClaro"
+                android:onClick="insertarDatos"
+                android:text="@string/strInsertarDatos"
+                android:textColor="@color/marron"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnConsultar"
+                app:layout_constraintTop_toBottomOf="@id/tvEleccion" />
+
+            <Button
+                android:id="@+id/btnConsultar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/moradoClaro"
+                android:onClick="insertarDatos"
+                android:text="@string/strConsultarDatos"
+                android:textColor="@color/marron"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEleccion" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
