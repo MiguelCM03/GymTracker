@@ -1,6 +1,7 @@
 package com.example.gymtracker
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -65,8 +66,9 @@ class CrearCuentaActivity : AppCompatActivity() {
             ).addOnCompleteListener { it ->
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Usuario creado con éxito", Toast.LENGTH_LONG).show()
+                    var intentIniciarSesionCuentaCreada = Intent(this, SeleccionAccionActivity::class.java)
+                    startActivity(intentIniciarSesionCuentaCreada)
                 } else {
-                    var resultado: AuthResult = it.getResult()
                     Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_LONG).show()
                 }
             }//On complete listener para saber si lo hace correctamente
