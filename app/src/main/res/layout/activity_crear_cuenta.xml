@@ -79,7 +79,7 @@
                 android:id="@+id/tilContrasena"
                 app:passwordToggleEnabled="true"
                 app:layout_constraintTop_toBottomOf="@id/tvContrasena"
-                app:layout_constraintBottom_toTopOf="@+id/btnConfirmar"
+                app:layout_constraintBottom_toTopOf="@+id/btnConfirmarAccion"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
@@ -94,7 +94,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnConfirmar"
+                android:id="@+id/btnConfirmarAccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/amarillo"

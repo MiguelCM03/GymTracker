@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun clickCrearCuenta(){
-        val intent = Intent(this, CrearCuentaActivity::class.java)
-        startActivity(intent)
+        val intentCrearCuenta = Intent(this, CrearCuentaActivity::class.java)
+        startActivity(intentCrearCuenta)
     }
     fun clickIniciarSesion(){
         validarCuenta()
@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
             txtContrasena?.text.toString()
         ).addOnCompleteListener { it ->
             if (it.isSuccessful) {
-                val intent = Intent(this, SeleccionarFechaGrupoActivity::class.java)
-                startActivity(intent)
+                val intentValidar = Intent(this, SeleccionAccionActivity::class.java)
+                startActivity(intentValidar)
             } else {
                 Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_LONG).show()
             }

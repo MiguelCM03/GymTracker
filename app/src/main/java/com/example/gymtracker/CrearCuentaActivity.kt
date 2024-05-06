@@ -29,7 +29,7 @@ class CrearCuentaActivity : AppCompatActivity() {
 
         txtContrasenaNueva = findViewById(R.id.txtContrasenaCrearCuenta)
         txtCorreoNuevo = findViewById(R.id.txtCorreoCrearCuenta)
-        var btnConfirmar = findViewById<Button>(R.id.btnConfirmar)
+        var btnConfirmar = findViewById<Button>(R.id.btnConfirmarAccion)
         btnConfirmar.setOnClickListener{
             /*if(*/
             validarCorreo()
@@ -110,12 +110,12 @@ class CrearCuentaActivity : AppCompatActivity() {
 
     fun validarCorreo()/*:Boolean*/{
         if(txtCorreoNuevo?.text.toString().isEmpty()){
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Error")
-            builder.setMessage("El correo no puede estar vacío")
-            builder.setPositiveButton("Aceptar", null)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
+            val alertaCorreoVacio = AlertDialog.Builder(this)
+            alertaCorreoVacio.setTitle("Error")
+            alertaCorreoVacio.setMessage("El correo no puede estar vacío")
+            alertaCorreoVacio.setPositiveButton("Aceptar", null)
+            val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
+            dialogoCorreoVacio.show()
         }
         //return correoCorrecto
     }//validarCorreo

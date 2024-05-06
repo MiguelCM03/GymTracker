@@ -86,6 +86,7 @@
                     android:id="@+id/txtContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="textPassword"
                     android:textColor="@color/azulOscuro"
                     />
 
