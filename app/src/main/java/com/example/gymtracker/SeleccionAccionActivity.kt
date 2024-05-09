@@ -41,14 +41,14 @@ class SeleccionAccionActivity : AppCompatActivity() {
 
     fun seleccionarAccion(isAccion: String){
         if(isAccion.equals(getString(R.string.strInsertarDatos))){
-            val intentSeleccion = Intent(this, InsertarDatosActivity::class.java)
-            intentSeleccion.putExtra("accion", isAccion)
-            startActivity(intentSeleccion)
+            val intentInsertar = Intent(this, InsertarDatosActivity::class.java)
+            intentInsertar.putExtra("accion", isAccion)
+            startActivity(intentInsertar)
         }
         else if(isAccion.equals(getString(R.string.strConsultarDatos))){
-            val intentSeleccion = Intent(this, ConsultarDatosActivity::class.java)
-            intentSeleccion.putExtra("accion", isAccion)
-            startActivity(intentSeleccion)
+            val intentConsultar = Intent(this, ConsultarDatosActivity::class.java)
+            intentConsultar.putExtra("accion", isAccion)
+            startActivity(intentConsultar)
         }
         else{
             val alertaSeleccionAccion = AlertDialog.Builder(this)

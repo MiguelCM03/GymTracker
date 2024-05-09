@@ -1,10 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InsertarDatosActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:background="@color/grisOscuro"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CrearCuentaActivity"
+    >
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/grisClaro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        app:cardCornerRadius="16dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvAnoInsertar"
+                android:text="@string/strEligeAno"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/spAnosInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/negro"
+                >
+            </TextView>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spAnosInsertar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAnoInsertar"
+                app:layout_constraintBottom_toTopOf="@id/tvMesInsertar"
+                android:entries="@array/spAnos"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvMesInsertar"
+                android:textColor="@color/negro"
+                android:text="@string/strEligeMes"
+                app:layout_constraintTop_toBottomOf="@id/spAnosInsertar"
+                app:layout_constraintBottom_toTopOf="@+id/spMesesInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spMesesInsertar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMesInsertar"
+                app:layout_constraintBottom_toTopOf="@id/tvGrupoInsertar"
+                android:entries="@array/spMeses"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvGrupoInsertar"
+                android:textColor="@color/negro"
+                android:text="@string/strEligeGrupo"
+                app:layout_constraintTop_toBottomOf="@+id/spMesesInsertar"
+                app:layout_constraintBottom_toTopOf="@+id/spGruposInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spGruposInsertar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGrupoInsertar"
+                app:layout_constraintBottom_toTopOf="@id/btnConfirmarAccionInsertar"
+                android:entries="@array/spGrupos"
+                />
+
+
+            <Button
+                android:id="@+id/btnConfirmarAccionInsertar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/amarillo"
+                android:onClick="insertarDatos"
+                android:text="@string/strConfirmar"
+                android:textColor="@color/negro"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spGruposInsertar" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
