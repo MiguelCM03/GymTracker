@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         val fbAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
-        //bundle.putString("Mensaje","Integración de FireBase correcta")
         fbAnalytics.logEvent("Pantalla_de_inicio", bundle)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)

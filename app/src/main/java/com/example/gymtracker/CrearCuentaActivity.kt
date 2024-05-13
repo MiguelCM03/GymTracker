@@ -34,28 +34,8 @@ class CrearCuentaActivity : AppCompatActivity() {
             /*if(*/
             validarCorreo()
             crearCuenta()}
-    }
 
-    //Funcion actualmente inutil
-    fun insertarDatos(view: View){
-        var conn = SQLite(this, "Clientes", null, 1)
-        var baseDatos = conn.writableDatabase
-        var wsNombre = txtCorreoNuevo?.text.toString()
-        var wsContrasena = txtContrasenaNueva?.text.toString()
-        if(!wsNombre.isEmpty() && !wsContrasena.isEmpty()){
-            var registro = ContentValues()
-            registro.put("wsNombre", wsNombre)
-            registro.put("wsContrasena", wsContrasena)
-            baseDatos.execSQL("SELECT * from USERS where UPPER(nombre) like UPPER()")
-            baseDatos.insert("USERS", null, registro)
-            txtContrasenaNueva?.setText("")
-            txtCorreoNuevo?.setText("")
-            Toast.makeText(this, "Registro añadido con exito", Toast.LENGTH_LONG).show()
-        }else{
-            Toast.makeText(this, "Campos vacíos", Toast.LENGTH_LONG).show()
-        }
-
-    }//insertarDatos()
+    }//onCreate()
 
     fun crearCuenta(){
         if(validarContrasena(txtContrasenaNueva?.text.toString())) {
@@ -72,7 +52,17 @@ class CrearCuentaActivity : AppCompatActivity() {
                 }
             }//On complete listener para saber si lo hace correctamente
         }
+        insertarEnBBDD()
     }//crearCuenta()
+
+    fun insertarEnBBDD(){
+        var txtNombre = txtCorreoNuevo?.text.toString()
+        var registro = ContentValues()
+        registro.put("nombre",txtNombre) //registro.put(nombre del campo en bbdd, valor)
+        var con = SQLite(this,"gimnasio", null, 1)
+        var baseDatos = con.writableDatabase
+        baseDatos.insert("clientes", null, registro)
+    }
 
     fun validarContrasena(isContrasena: String):Boolean{
         var tieneMinus = false
