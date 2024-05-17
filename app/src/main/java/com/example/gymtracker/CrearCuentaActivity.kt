@@ -3,7 +3,6 @@ package com.example.gymtracker
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -59,7 +58,7 @@ class CrearCuentaActivity : AppCompatActivity() {
         var txtNombre = txtCorreoNuevo?.text.toString()
         var registro = ContentValues()
         registro.put("nombre",txtNombre) //registro.put(nombre del campo en bbdd, valor)
-        var con = SQLite(this,"gimnasio", null, 1)
+        var con = DatabaseHelper(this,"gimnasio", null, 1)
         var baseDatos = con.writableDatabase
         baseDatos.insert("clientes", null, registro)
     }

@@ -32,11 +32,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        val tvUsuario = findViewById<TextView>(R.id.tvUsuario)
         txtContrasena = findViewById(R.id.txtContrasena)
         txtCorreo = findViewById(R.id.txtCorreo)
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
+        var conn = DatabaseHelper(this, "USUARIOS", null, 1)
+        //var baseDatos = conn.
+        //var ejercicio = baseDatos.execSQL("SELECT * from EJERCICIOS where UPPER(nombre) like UPPER(\"CINTA\")").toString().trim()
+        //tvUsuario.setText(ejercicio)
         txtCrearCuenta.setOnClickListener{clickCrearCuenta()}
         btnIniciarSesion.setOnClickListener{clickIniciarSesion()}
     }

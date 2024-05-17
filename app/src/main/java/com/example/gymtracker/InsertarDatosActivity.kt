@@ -21,29 +21,25 @@ class InsertarDatosActivity : AppCompatActivity() {
             insets
         }
     }//onCreate()
-    fun fInsertarDatos(){
-        var nombreUsuario = FirebaseAuth.getInstance().currentUser.toString()
-
-    }
 
     //Funcion actualmente inutil
-    fun insertarDatos(view: View){
-        var conn = SQLite(this, "Clientes", null, 1)
-        var baseDatos = conn.writableDatabase
-        var wsNombre = txtCorreoNuevo?.text.toString()
-        var wsContrasena = txtContrasenaNueva?.text.toString()
-        if(!wsNombre.isEmpty() && !wsContrasena.isEmpty()){
-            var registro = ContentValues()
-            registro.put("wsNombre", wsNombre)
-            registro.put("wsContrasena", wsContrasena)
-            baseDatos.execSQL("SELECT * from USERS where UPPER(nombre) like UPPER()")
-            baseDatos.insert("USERS", null, registro)
-            txtContrasenaNueva?.setText("")
-            txtCorreoNuevo?.setText("")
-            Toast.makeText(this, "Registro añadido con exito", Toast.LENGTH_LONG).show()
-        }else{
-            Toast.makeText(this, "Campos vacíos", Toast.LENGTH_LONG).show()
-        }
-
-    }//insertarDatos()
+//    fun insertarDatos(view: View){
+//        var conn = SQLite(this, "USUARIOS", null, 1)
+//        var baseDatos = conn.writableDatabase
+//        var wsNombre = txtCorreoNuevo?.text.toString()
+//        var wsContrasena = txtContrasenaNueva?.text.toString()
+//        if(!wsNombre.isEmpty() && !wsContrasena.isEmpty()){
+//            var registro = ContentValues()
+//            registro.put("wsNombre", wsNombre)
+//            registro.put("wsContrasena", wsContrasena)
+//            baseDatos.execSQL("SELECT * from USERS where UPPER(nombre) like UPPER()")
+//            baseDatos.insert("USERS", null, registro)
+//            txtContrasenaNueva?.setText("")
+//            txtCorreoNuevo?.setText("")
+//            Toast.makeText(this, "Registro añadido con exito", Toast.LENGTH_LONG).show()
+//        }else{
+//            Toast.makeText(this, "Campos vacíos", Toast.LENGTH_LONG).show()
+//        }
+//
+//    }//insertarDatos()
 }
