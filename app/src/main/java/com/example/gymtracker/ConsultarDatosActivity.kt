@@ -1,9 +1,11 @@
 package com.example.gymtracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ConsultarDatosActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        var consultaPosible = false
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_consultar_datos)
@@ -21,9 +23,20 @@ class ConsultarDatosActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val contexto = this.baseContext
+
         val spGrupo = findViewById<Spinner>(R.id.spGruposConsultar)
         val spEjercicios = findViewById<Spinner>(R.id.spEjerciciosConsultar)
-        val contexto = this.baseContext
+        val btnConfirmarConsulta = findViewById<Button>(R.id.btnConfirmarAccionConsultar)
+        var consultaPosible = false
+
+        btnConfirmarConsulta.setOnClickListener{
+            if(consultaPosible){
+                val intentDatosDeConsulta = Intent(this, DatosDeConsultaActivity::class.java)
+                startActivity(intentDatosDeConsulta)
+            }
+        }
+
 
         spGrupo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -78,5 +91,6 @@ class ConsultarDatosActivity : AppCompatActivity() {
         }//onItemSelectedListener()
 
     }//onCreate
+
 
 }
