@@ -93,8 +93,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvGrupoConsultar"
-                app:layout_constraintBottom_toTopOf="@id/btnConfirmarAccionConsultar"
+                app:layout_constraintBottom_toTopOf="@id/tvEjercicioConsultar"
                 android:entries="@array/spGrupos"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEjercicioConsultar"
+                android:textColor="@color/negro"
+                android:text="@string/strEligeEjercicio"
+                app:layout_constraintTop_toBottomOf="@+id/spGruposConsultar"
+                app:layout_constraintBottom_toTopOf="@+id/spEjerciciosConsultar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+            </TextView>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/spEjerciciosConsultar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEjercicioConsultar"
+                app:layout_constraintBottom_toTopOf="@id/btnConfirmarAccionConsultar"
                 />
 
 
@@ -109,7 +133,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spGruposConsultar" />
+                app:layout_constraintTop_toBottomOf="@id/spEjerciciosConsultar" />
 
 
 

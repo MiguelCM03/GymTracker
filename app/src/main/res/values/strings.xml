@@ -46,11 +46,16 @@
         <item>2032</item>
     </string-array>
     <string-array name="spGrupos">
+        <item></item>
         <item>Brazo</item>
         <item>Pierna</item>
         <item>Torso</item>
         <item>Cardio</item>
         <item>Abdomen</item>
+        <item>Espalda</item>
+    </string-array>
+    <string-array name="emptyArray">
+        <item></item>
     </string-array>
     <string name="eleccion">Selecciona lo que quieres hacer:</string>
     <string name="strConsultarDatos">Consultar datos</string>
