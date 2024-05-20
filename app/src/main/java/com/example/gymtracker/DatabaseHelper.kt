@@ -1,127 +1,130 @@
 package com.example.gymtracker
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper (context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int): SQLiteOpenHelper(context, name, factory, version) {
+class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, null, VERSION) {
         companion object{
                 private const val NOMBRE_DB = "GIMNASIO"
                 private const val VERSION = 1
+                const val NOMBRE_TABLA = "USUARIOS"
         }
-    override fun onConfigure(db: SQLiteDatabase?) {
-        super.onConfigure(db)
-        //db?.setForeignKeyConstraintsEnabled(true)
-    }
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("""
-                        create table USUARIOS(
-                        nombre text primary key autoincrement
-                        );
-                        """.trimIndent())
-        db?.execSQL("""
+        override fun onConfigure(db: SQLiteDatabase?) {
+                super.onConfigure(db)
+                db?.setForeignKeyConstraintsEnabled(true)
+        }
+        override fun onCreate(db: SQLiteDatabase?) {
+                //CREACION TABLAS
+
+                // USUARIOS
+                var crearTablaUsuarios = "CREATE TABLE USUARIOS(nombre text primary key)"
+                db?.execSQL(crearTablaUsuarios)
+
+                //GRUPOS
+                var crearTablaGrupos = """
                         create table GRUPOS(
-                        nombre text primary key autoincrement
+                        nombre text primary key
                         );
-                        """.trimIndent())
-        db?.execSQL("""
+                        """.trimIndent()
+                db?.execSQL(crearTablaGrupos)
+
+                //EJERCICIOS
+                var crearTablaEjercicios = """
                         create table EJERCICIOS(
-                        nombre text primary key autoincrement,
+                        nombre text primary key,
                         nombre_grupo,
-                        FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE);
-                        """.trimIndent())
-        db?.execSQL("""
+                        FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE)
+                        """.trimIndent()
+                db?.execSQL(crearTablaEjercicios)
+
+                //REGISTROS
+                var crearTablaRegistros = """
                         create table REGISTROS(
                         id int primary key autoincrement,
                         nombre_usuario int,
-                        nombre_grupo int,
                         nombre_ejercicio int,
                         mes text,
-                        ano text,
+                        ano integer,
                         peso float,
                         FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
-                        FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE,
-                        FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE);
-                        """.trimIndent())
-
-        //INSERTS
+                        FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
+                        """.trimIndent()
+                db?.execSQL(crearTablaRegistros)
 
 
-        //GRUPOS
-        val gruposMusculares = arrayOf(R.array.spGrupos)
-        for(grupo in gruposMusculares){
-            db?.execSQL("insert into GRUPOS values("+ grupo +");")
+                //INSERCIONES DE DATOS
+
+                //GRUPOS
+                val gruposMusculares = arrayOf(R.array.spGrupos)
+                for(grupo in gruposMusculares){
+                        db?.execSQL("insert into GRUPOS values("+ grupo +");")
+                }
+
+                //EJERCICIOS
+
+                //CARDIO
+                val ejerciciosCardio = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosCardio){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"CARDIO\");")
+                }
+
+                //BRAZO
+                val ejerciciosBrazo = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosBrazo){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"BRAZO\");")
+                }
+
+                //PIERNA
+                val ejerciciosPierna = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosPierna){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"PIERNA\");")
+                }
+
+                //TORSO
+                val ejerciciosTorso = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosTorso){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"TORSO\");")
+                }
+
+                //ESPALDA
+                val ejerciciosEspalda = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosEspalda){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"ESPALDA\");")
+                }
+
+                //ABDOMEN
+                val ejerciciosAbdomen = arrayOf(R.array.spGrupos)
+                for(ejercicio in ejerciciosAbdomen){
+                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"ABDOMEN\");")
+                }
+        }//onCreate
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
         }
 
-        //EJERCICIOS
+        fun insertarUsuario(db: SQLiteDatabase, nombre: String):Long{
+                val valores = ContentValues()
+                valores.put("NOMBRE", nombre)
+                return db.insert(NOMBRE_TABLA, null, valores)
+        }//insertarUsuario
 
-        //CARDIO
-        db?.execSQL("insert into GRUPOS values(\"CINTA\", \"CARDIO\");")
-        db?.execSQL("insert into GRUPOS values(\"BICI\", \"CARDIO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELIPTICA\", \"CARDIO\");")
+        fun insertarRegistro(db: SQLiteDatabase, nombreUsuario: String, nombreEjercicio: String, peso: Float, ano: Int, mes: String){
+                val valoresGrupo = ContentValues()
+                valoresGrupo.put("NOMBRE", "Grupo de prueba")
 
-        //BRAZO
-        db?.execSQL("insert into GRUPOS values(\"CURL EN POLEA\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"CURL MARTILLO\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"BARRA Z\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"CURL EN BANCO INCLINADO\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"FONDOS DE TRICEPS\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACION TRAS NUCA CON MANCUERNAS\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"EXTENSION TRAS NUCA EN POLEA\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"EXTENSION BAJA EN POLEA\", \"BRAZO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACION TRAS NUCA EN POLEA\", \"BRAZO\");")
+                val valoresEjercicio = ContentValues()
+                valoresEjercicio.put("NOMBRE", "Ejercicio de prueba")
+                valoresEjercicio.put("NOMBRE_GRUPO", "Grupo de prueba")
 
-        //PIERNA
-        db?.execSQL("insert into GRUPOS values(\"ADUCTOR\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"ABDUCTOR\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"EXTENSION CUADRICEPS\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"FLEXION FEMORAL SENTADO\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"FLEXION FEMORAL TUMBADO\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"SENTADILLA\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"SENTADILLA BULGARA\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"SENTADILLA HACK\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"GEMELO\", \"PIERNA\");")
-        db?.execSQL("insert into GRUPOS values(\"PRENSA\", \"PIERNA\");")
-
-        //TORSO
-        db?.execSQL("insert into GRUPOS values(\"PRESS BANCO PLANO\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS BANCO INCLINADO\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS BANCO INCLINADO CON MANCUERNAS\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS EN MAQUINA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"MARIPOSA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"POLEA ASCENDENTE\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"POLEA DESCENDENTE\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"POLEA NEUTRA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS MILITAR MANCUERNAS\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS MILITAR BARRA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"PRESS ARNOLD\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACIONES FRONTALES\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACIONES LATERALES MANCUERNA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACIONES LATERALES POLEA\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACIONES POSTERIORES\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"ENCOGIMIENTO DE TRAPECIO\", \"TORSO\");")
-        db?.execSQL("insert into GRUPOS values(\"FACE PULL\", \"TORSO\");")
-
-        //ESPALDA
-        db?.execSQL("insert into GRUPOS values(\"REMO GIRONDA\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"REMO MAQUINA\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"REMO MANCUERNAS\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"REMO BARRA\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"REMO BARRA T\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"JALON POLEA\", \"ESPALDA\");")
-        db?.execSQL("insert into GRUPOS values(\"JALON MAQUINA\", \"ESPALDA\");")
-
-        //ABDOMEN
-        db?.execSQL("insert into GRUPOS values(\"CRUNCH\", \"ABDOMEN\");")
-        db?.execSQL("insert into GRUPOS values(\"CRUNCH PIERNAS FLEXIONADAS\", \"ABDOMEN\");")
-        db?.execSQL("insert into GRUPOS values(\"ELEVACION DE PIERNAS\", \"ABDOMEN\");")
-        db?.execSQL("insert into GRUPOS values(\"PLANCHA\", \"ABDOMEN\");")
-
-    }//onCreate
-
-
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
-    }
+                val valores = ContentValues()
+                valores.put("nombre_usuario", nombreUsuario)
+                valores.put("nombre_ejercicio", nombreEjercicio)
+                valores.put("peso", peso)
+                valores.put("ano", ano)
+                valores.put("mes", mes)
+                db.insert("REGISTROS", null, valores)
+        }
 
 
 }

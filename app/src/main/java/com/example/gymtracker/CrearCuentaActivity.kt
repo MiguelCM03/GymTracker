@@ -58,7 +58,7 @@ class CrearCuentaActivity : AppCompatActivity() {
         var txtNombre = txtCorreoNuevo?.text.toString()
         var registro = ContentValues()
         registro.put("nombre",txtNombre) //registro.put(nombre del campo en bbdd, valor)
-        var con = DatabaseHelper(this,"gimnasio", null, 1)
+        var con = DatabaseHelper(this)
         var baseDatos = con.writableDatabase
         baseDatos.insert("clientes", null, registro)
     }

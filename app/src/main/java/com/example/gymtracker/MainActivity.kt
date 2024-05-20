@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     var txtCorreo: TextInputEditText? = null
     var txtContrasena: TextInputEditText? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
@@ -32,15 +33,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val tvUsuario = findViewById<TextView>(R.id.tvUsuario)
+        pruebaBBDD()
+
         txtContrasena = findViewById(R.id.txtContrasena)
         txtCorreo = findViewById(R.id.txtCorreo)
+
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
-        var conn = DatabaseHelper(this, "USUARIOS", null, 1)
-        //var baseDatos = conn.
-        //var ejercicio = baseDatos.execSQL("SELECT * from EJERCICIOS where UPPER(nombre) like UPPER(\"CINTA\")").toString().trim()
-        //tvUsuario.setText(ejercicio)
         txtCrearCuenta.setOnClickListener{clickCrearCuenta()}
         btnIniciarSesion.setOnClickListener{clickIniciarSesion()}
     }
@@ -66,4 +65,8 @@ class MainActivity : AppCompatActivity() {
             }
         }//On complete listener para saber si lo hace correctamente
     }//validarCuenta()
+    fun pruebaBBDD(){
+        var conexionBBDD = DatabaseHelper(this)
+        conexionBBDD.insertarRegistro(conexionBBDD.writableDatabase, "Usuario de prueba", "Ejercicio de prueba", 33.0f, 2024, "Marzo")
+    }
 }

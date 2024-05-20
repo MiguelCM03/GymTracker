@@ -12,6 +12,7 @@
     <string name="strNoTienesCuenta">Aun no tienes una cuenta? Crea una aquí</string>
     <string name="strEligeAno">Selecciona un año:</string>
     <string name="strEligeGrupo">Selecciona un grupo muscular:</string>
+    <string name="strEligeEjercicio">Selecciona un ejercicio:</string>
     <string name="strEligeMes">Selecciona un mes:</string>
     <string name="strInsertaPeso">Inserta el peso:</string>
     <string-array name="spMeses">
@@ -54,5 +55,66 @@
     <string name="eleccion">Selecciona lo que quieres hacer:</string>
     <string name="strConsultarDatos">Consultar datos</string>
     <string name="strInsertarDatos">Insertar datos</string>
-
+    <string-array name="slEjsPierna">
+        <item>ADUCTOR</item>
+        <item>ABDUCTOR</item>
+        <item>EXTENSION CUADRICEPS</item>
+        <item>FLEXION FEMORAL SENTADO</item>
+        <item>FLEXION FEMORAL TUMBADO</item>
+        <item>SENTADILLA</item>
+        <item>SENTADILLA BULGARA</item>
+        <item>SENTADILLA HACK</item>
+        <item>GEMELO</item>
+        <item>PRENSA</item>
+    </string-array>
+    <string-array name="slEjsCardio">
+        <item>CINTA</item>
+        <item>BICI</item>
+        <item>ELIPTICA</item>
+    </string-array>
+    <string-array name="slEjsBrazo">
+        <item>CURL EN POLEA</item>
+        <item>CURL MARTILLO</item>
+        <item>BARRA Z</item>
+        <item>CURL EN BANCO INCLINADO</item>
+        <item>FONDOS DE TRICEPS</item>
+        <item>ELEVACION TRAS NUCA CON MANCUERNAS</item>
+        <item>EXTENSION TRAS NUCA EN POLEA</item>
+        <item>EXTENSION BAJA EN POLEA</item>
+        <item>ELEVACION TRAS NUCA EN POLEA</item>
+    </string-array>
+    <string-array name="slEjsTorso">
+        <item>PRESS BANCO PLANO</item>
+        <item>PRESS BANCO INCLINADO</item>
+        <item>PRESS BANCO INCLINADO CON MANCUERNAS</item>
+        <item>PRESS EN MAQUINA</item>
+        <item>PRESS MILITAR MANCUERNAS</item>
+        <item>PRESS MILITAR BARRA</item>
+        <item>PRESS ARNOLD</item>
+        <item>POLEA ASCENDENTE</item>
+        <item>POLEA NEUTRA</item>
+        <item>POLEA DESCENDENTE</item>
+        <item>MARIPOSA</item>
+        <item>ELEVACIONES FRONTALES</item>
+        <item>ELEVACIONES LATERALES POLEA</item>
+        <item>ELEVACIONES LATERALES MANCUERNA</item>
+        <item>ELEVACIONES POSTERIORES</item>
+        <item>ENCOGIMIENTO DE TRAPECIO</item>
+    </string-array>
+    <string-array name="slEjsEspalda">
+        <item>FACE PULL</item>
+        <item>REMO GIRONDA</item>
+        <item>REMO MAQUINA</item>
+        <item>REMO MANCUERNAS</item>
+        <item>REMO BARRA</item>
+        <item>REMO BARRA T</item>
+        <item>JALON POLEA</item>
+        <item>JALON MAQUINA</item>
+    </string-array>
+    <string-array name="slEjsAbdomen">
+        <item>CRUNCH</item>
+        <item>CRUNCH PIERNAS FLEXIONADAS</item>
+        <item>ELEVACION DE PIERNAS</item>
+        <item>PLANCHA</item>
+    </string-array>
 </resources>
