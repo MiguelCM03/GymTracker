@@ -3,6 +3,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
 
 class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, null, VERSION) {
         companion object{
@@ -24,7 +25,8 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 //GRUPOS
                 var crearTablaGrupos = """
                         create table GRUPOS(
-                        nombre text primary key
+                        id int primary key,
+                        nombre text
                         );
                         """.trimIndent()
                 db?.execSQL(crearTablaGrupos)
@@ -41,7 +43,7 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 //REGISTROS
                 var crearTablaRegistros = """
                         create table REGISTROS(
-                        id int primary key autoincrement,
+                        id int primary key /*autoincrement*/,
                         nombre_usuario int,
                         nombre_ejercicio int,
                         mes text,
@@ -56,10 +58,13 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 //INSERCIONES DE DATOS
 
                 //GRUPOS
-                val gruposMusculares = arrayOf(R.array.spGrupos)
-                for(grupo in gruposMusculares){
-                        db?.execSQL("insert into GRUPOS values("+ grupo +");")
-                }
+                var valores = ContentValues()
+                valores.put("GRUPO 1", "PIERNA")
+                db?.insert("GRUPOS", null, valores)
+//                val gruposMusculares = arrayOf(R.array.spGrupos)
+//                for(grupo in gruposMusculares){
+//                        db?.execSQL("insert into GRUPOS values(" + grupo + ");")
+//                }
 
                 //EJERCICIOS
 
@@ -72,7 +77,7 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 //BRAZO
                 val ejerciciosBrazo = arrayOf(R.array.spGrupos)
                 for(ejercicio in ejerciciosBrazo){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"BRAZO\");")
+                        db?.execSQL("insert into GRUPOS(NOMBRE) values("+ ejercicio +", \"BRAZO\");")
                 }
 
                 //PIERNA

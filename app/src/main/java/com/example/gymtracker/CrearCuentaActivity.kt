@@ -30,7 +30,6 @@ class CrearCuentaActivity : AppCompatActivity() {
         txtCorreoNuevo = findViewById(R.id.txtCorreoCrearCuenta)
         var btnConfirmar = findViewById<Button>(R.id.btnConfirmarAccion)
         btnConfirmar.setOnClickListener{
-            /*if(*/
             validarCorreo()
             crearCuenta()}
 
@@ -100,13 +99,32 @@ class CrearCuentaActivity : AppCompatActivity() {
 
     fun validarCorreo()/*:Boolean*/{
         if(txtCorreoNuevo?.text.toString().isEmpty()){
-            val alertaCorreoVacio = AlertDialog.Builder(this)
-            alertaCorreoVacio.setTitle("Error")
-            alertaCorreoVacio.setMessage("El correo no puede estar vacío")
-            alertaCorreoVacio.setPositiveButton("Aceptar", null)
-            val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
-            dialogoCorreoVacio.show()
-        }
+
+            //comprobacion de que no haya correos repetidos
+        val autenticacion = FirebaseAuth.getInstance()
+            //autenticacion.
+//
+//            autenticacion.fetchSignInMethodsForEmail(txtCorreoNuevo?.text.toString())
+//            .addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    val signInMethods = task.result?.signInMethods
+//                    if (signInMethods.isNullOrEmpty()) {
+//                        // No user is registered with this email
+//                        println("Email is not registered.")
+//                    } else {
+//                        // Email is already registered
+//                        println("Email is already registered.")
+//                    }
+
+                    val alertaCorreoVacio = AlertDialog.Builder(this)
+                    alertaCorreoVacio.setTitle("Error")
+                    alertaCorreoVacio.setMessage("El correo no puede estar vacío")
+                    alertaCorreoVacio.setPositiveButton("Aceptar", null)
+                    val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
+                    dialogoCorreoVacio.show()
+                }
+//            }
+//        }
         //return correoCorrecto
     }//validarCorreo
 

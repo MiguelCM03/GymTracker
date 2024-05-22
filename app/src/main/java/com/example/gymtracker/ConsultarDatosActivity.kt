@@ -25,62 +25,69 @@ class ConsultarDatosActivity : AppCompatActivity() {
         }
         val contexto = this.baseContext
 
-        val spGrupo = findViewById<Spinner>(R.id.spGruposConsultar)
-        val spEjercicios = findViewById<Spinner>(R.id.spEjerciciosConsultar)
+        val spGruposConsulta = findViewById<Spinner>(R.id.spGruposConsultar)
+        val spEjerciciosConsulta = findViewById<Spinner>(R.id.spEjerciciosConsultar)
+        val spAnosConsulta = findViewById<Spinner>(R.id.spAnosConsultar)
+        val spMesesConsulta = findViewById<Spinner>(R.id.spMesesConsultar)
         val btnConfirmarConsulta = findViewById<Button>(R.id.btnConfirmarAccionConsultar)
         var consultaPosible = false
 
         btnConfirmarConsulta.setOnClickListener{
             if(consultaPosible){
                 val intentDatosDeConsulta = Intent(this, DatosDeConsultaActivity::class.java)
+                intentDatosDeConsulta.putExtra("ANO", spAnosConsulta.selectedItem.toString())
+                intentDatosDeConsulta.putExtra("MES", spMesesConsulta.selectedItem.toString())
+                intentDatosDeConsulta.putExtra("EJERCICIO", spEjerciciosConsulta.selectedItem.toString())
+
                 startActivity(intentDatosDeConsulta)
+            }else{
+                //Mensaje de que debe seleccionar un ejercicio
             }
         }
 
 
-        spGrupo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spGruposConsulta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                //lateinit var adaptador: ArrayAdapter<CharSequence>
                 if(position==0) {//NADA
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.emptyArray, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = false
                 }
                 else if(position==1) {//BRAZO
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsBrazo, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
                 else if(position==2) {//PIERNA
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsPierna, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
                 else if(position==3) {//TORSO
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsTorso, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
                 else if(position==4) {//CARDIO
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsCardio, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
                 else if(position==5) {//ABDOMEN
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsAbdomen, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
                 else if(position==6) {//ESPALDA
                     val adaptador = ArrayAdapter.createFromResource(contexto, R.array.slEjsEspalda, android.R.layout.simple_spinner_item)
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spEjercicios.adapter = adaptador
+                    spEjerciciosConsulta.adapter = adaptador
                     consultaPosible = true
                 }
             }//onItemSelected()

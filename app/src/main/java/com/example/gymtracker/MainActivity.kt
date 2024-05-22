@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        pruebaBBDD()
 
         txtContrasena = findViewById(R.id.txtContrasena)
         txtCorreo = findViewById(R.id.txtCorreo)
@@ -65,8 +64,4 @@ class MainActivity : AppCompatActivity() {
             }
         }//On complete listener para saber si lo hace correctamente
     }//validarCuenta()
-    fun pruebaBBDD(){
-        var conexionBBDD = DatabaseHelper(this)
-        conexionBBDD.insertarRegistro(conexionBBDD.writableDatabase, "Usuario de prueba", "Ejercicio de prueba", 33.0f, 2024, "Marzo")
-    }
 }
