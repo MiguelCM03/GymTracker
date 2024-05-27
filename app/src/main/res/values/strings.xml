@@ -122,4 +122,9 @@
         <item>ELEVACION DE PIERNAS</item>
         <item>PLANCHA</item>
     </string-array>
+    <string name="strAno">Año: </string>
+    <string name="strMes">Mes: </string>
+    <string name="strEjercicio">Ejercicio: </string>
+    <string name="strTituloConsulta">Resultados de la búsqueda: </string>
+    <string name="strPeso">Peso: </string>
 </resources>
