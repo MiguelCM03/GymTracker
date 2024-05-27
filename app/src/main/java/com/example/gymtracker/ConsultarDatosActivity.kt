@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -41,7 +42,12 @@ class ConsultarDatosActivity : AppCompatActivity() {
 
                 startActivity(intentDatosDeConsulta)
             }else{
-                //Mensaje de que debe seleccionar un ejercicio
+                val alertaEjercicioNoSeleccionado = AlertDialog.Builder(this)
+                alertaEjercicioNoSeleccionado.setTitle("Error")
+                alertaEjercicioNoSeleccionado.setMessage("Selecciona un grupo muscular y un ejercicio para continuar")
+                alertaEjercicioNoSeleccionado.setPositiveButton("OK", null)
+                val dialogoEjercicioNoSeleccionado: AlertDialog = alertaEjercicioNoSeleccionado.create()
+                dialogoEjercicioNoSeleccionado.show()
             }
         }
 

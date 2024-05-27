@@ -30,13 +30,12 @@ class CrearCuentaActivity : AppCompatActivity() {
         txtCorreoNuevo = findViewById(R.id.txtCorreoCrearCuenta)
         var btnConfirmar = findViewById<Button>(R.id.btnConfirmarAccion)
         btnConfirmar.setOnClickListener{
-            validarCorreo()
             crearCuenta()}
 
     }//onCreate()
 
     fun crearCuenta(){
-        if(validarContrasena(txtContrasenaNueva?.text.toString())) {
+        if(validarCorreo(txtCorreoNuevo?.text.toString()) && validarContrasena(txtContrasenaNueva?.text.toString())) {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 txtCorreoNuevo?.text.toString(),
                 txtContrasenaNueva?.text.toString()
@@ -49,8 +48,8 @@ class CrearCuentaActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_LONG).show()
                 }
             }//On complete listener para saber si lo hace correctamente
+            insertarEnBBDD()
         }
-        insertarEnBBDD()
     }//crearCuenta()
 
     fun insertarEnBBDD(){
@@ -97,36 +96,36 @@ class CrearCuentaActivity : AppCompatActivity() {
         dialog.show()
     }//mostrarError()
 
-    fun validarCorreo()/*:Boolean*/{
-        if(txtCorreoNuevo?.text.toString().isEmpty()){
-
+    fun validarCorreo(isCorreo: String):Boolean{
+        var correoCorrecto = true
+        if(isCorreo.isEmpty()) {
+            correoCorrecto = false
+            val alertaCorreoVacio = AlertDialog.Builder(this)
+            alertaCorreoVacio.setTitle("Error")
+            alertaCorreoVacio.setMessage("El correo no puede estar vacío")
+            alertaCorreoVacio.setPositiveButton("Aceptar", null)
+            val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
+            dialogoCorreoVacio.show()
+        }else {
             //comprobacion de que no haya correos repetidos
-        val autenticacion = FirebaseAuth.getInstance()
-            //autenticacion.
-//
-//            autenticacion.fetchSignInMethodsForEmail(txtCorreoNuevo?.text.toString())
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    val signInMethods = task.result?.signInMethods
-//                    if (signInMethods.isNullOrEmpty()) {
-//                        // No user is registered with this email
-//                        println("Email is not registered.")
-//                    } else {
-//                        // Email is already registered
-//                        println("Email is already registered.")
-//                    }
-
-                    val alertaCorreoVacio = AlertDialog.Builder(this)
-                    alertaCorreoVacio.setTitle("Error")
-                    alertaCorreoVacio.setMessage("El correo no puede estar vacío")
-                    alertaCorreoVacio.setPositiveButton("Aceptar", null)
-                    val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
-                    dialogoCorreoVacio.show()
-                }
-//            }
-//        }
-        //return correoCorrecto
+            val autenticacion = FirebaseAuth.getInstance()
+            autenticacion.fetchSignInMethodsForEmail(txtCorreoNuevo?.text.toString())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val signInMethods = task.result?.signInMethods
+                        if (signInMethods.isNullOrEmpty()) {
+                            correoCorrecto = false
+                            // No user is registered with this email
+                            val alertaCorreoEnUso = AlertDialog.Builder(this)
+                            alertaCorreoEnUso.setTitle("Error")
+                            alertaCorreoEnUso.setMessage("El correo ya se está utilizando en otra cuenta.")
+                            alertaCorreoEnUso.setPositiveButton("Aceptar", null)
+                            val dialogoCorreoEnUso: AlertDialog = alertaCorreoEnUso.create()
+                            dialogoCorreoEnUso.show()
+                        }//if
+                    }//if
+                }//onCompleteListener
+        }//else
+        return correoCorrecto
     }//validarCorreo
-
-
 }//CrearCuentaActivity
