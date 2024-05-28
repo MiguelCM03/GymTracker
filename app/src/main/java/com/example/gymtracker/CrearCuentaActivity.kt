@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.math.sign
 
 var txtCorreoNuevo: TextInputEditText? = null
 var txtContrasenaNueva: TextInputEditText? = null
@@ -55,10 +56,10 @@ class CrearCuentaActivity : AppCompatActivity() {
     fun insertarEnBBDD(){
         var txtNombre = txtCorreoNuevo?.text.toString()
         var registro = ContentValues()
-        registro.put("nombre",txtNombre) //registro.put(nombre del campo en bbdd, valor)
+        registro.put("NOMBRE",txtNombre) //registro.put(nombre del campo en bbdd, valor)
         var con = DatabaseHelper(this)
         var baseDatos = con.writableDatabase
-        baseDatos.insert("clientes", null, registro)
+        baseDatos.insert("USUARIOS", null, registro)
     }
 
     fun validarContrasena(isContrasena: String):Boolean{
@@ -106,26 +107,7 @@ class CrearCuentaActivity : AppCompatActivity() {
             alertaCorreoVacio.setPositiveButton("Aceptar", null)
             val dialogoCorreoVacio: AlertDialog = alertaCorreoVacio.create()
             dialogoCorreoVacio.show()
-        }else {
-            //comprobacion de que no haya correos repetidos
-            val autenticacion = FirebaseAuth.getInstance()
-            autenticacion.fetchSignInMethodsForEmail(txtCorreoNuevo?.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val signInMethods = task.result?.signInMethods
-                        if (signInMethods.isNullOrEmpty()) {
-                            correoCorrecto = false
-                            // No user is registered with this email
-                            val alertaCorreoEnUso = AlertDialog.Builder(this)
-                            alertaCorreoEnUso.setTitle("Error")
-                            alertaCorreoEnUso.setMessage("El correo ya se está utilizando en otra cuenta.")
-                            alertaCorreoEnUso.setPositiveButton("Aceptar", null)
-                            val dialogoCorreoEnUso: AlertDialog = alertaCorreoEnUso.create()
-                            dialogoCorreoEnUso.show()
-                        }//if
-                    }//if
-                }//onCompleteListener
-        }//else
+        }
         return correoCorrecto
     }//validarCorreo
 }//CrearCuentaActivity

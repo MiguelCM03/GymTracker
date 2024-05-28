@@ -1,6 +1,7 @@
 package com.example.gymtracker
 
 import android.content.Intent
+import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 class ConsultarDatosActivity : AppCompatActivity() {
 
@@ -36,9 +39,24 @@ class ConsultarDatosActivity : AppCompatActivity() {
         btnConfirmarConsulta.setOnClickListener{
             if(consultaPosible){
                 val intentDatosDeConsulta = Intent(this, DatosDeConsultaActivity::class.java)
-                intentDatosDeConsulta.putExtra("ANO", spAnosConsulta.selectedItem.toString())
-                intentDatosDeConsulta.putExtra("MES", spMesesConsulta.selectedItem.toString())
-                intentDatosDeConsulta.putExtra("EJERCICIO", spEjerciciosConsulta.selectedItem.toString())
+
+                var valorAnoConsultado = spAnosConsulta.selectedItem.toString()
+                var valorMesConsultado = spMesesConsulta.selectedItem.toString()
+                var valorEjercicioConsultado = spEjerciciosConsulta.selectedItem.toString()
+
+
+
+                var dbHelperConsulta = DatabaseHelper(this)
+                var baseDeDatosConsulta = dbHelperConsulta.readableDatabase
+                var usuarioFirebase = intent.getStringExtra("USUARIO")
+                var valorPesoConsultado = baseDeDatosConsulta.execSQL("SELECT PESO FROM REGISTROS WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER($usuarioFirebase) AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER($valorEjercicioConsultado)" +
+                    "and UPPER (MES) like UPPER($valorMesConsultado) and UPPER(ANO) LIKE UPPER($valorAnoConsultado);").toString()
+
+                intentDatosDeConsulta.putExtra("ANO", valorAnoConsultado)
+                intentDatosDeConsulta.putExtra("MES", valorMesConsultado)
+                intentDatosDeConsulta.putExtra("EJERCICIO", valorEjercicioConsultado)
+                intentDatosDeConsulta.putExtra("PESO", valorPesoConsultado)
+
 
                 startActivity(intentDatosDeConsulta)
             }else{

@@ -131,7 +131,7 @@
                 android:id="@+id/clEjercicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/cvPesoConsultado"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clMes">
@@ -144,8 +144,9 @@
                     android:textAlignment="textStart"
                     android:textSize="24sp"
                     android:textColor="@color/negro"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvValorEjercicioConsultado"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvValorEjercicioConsultado"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,19 +155,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/strMes"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="center"
                     android:textSize="24sp"
                     android:textColor="@color/azulOscuro"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tvEjercicioConsultado"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:maxLines="3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEjercicioConsultado" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/cvPesoConsultado"
                 app:layout_constraintTop_toBottomOf="@id/clEjercicio"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +185,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/strMes"
+                        android:text="@string/strPeso"
                         android:id="@+id/tvPesoConsultado"
                         android:textColor="@color/negro"
                         app:layout_constraintStart_toStartOf="parent"

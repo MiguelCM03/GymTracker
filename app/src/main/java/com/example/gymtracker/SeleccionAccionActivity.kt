@@ -40,14 +40,17 @@ class SeleccionAccionActivity : AppCompatActivity() {
 
 
     fun seleccionarAccion(isAccion: String){
+        val nombreUsuarioActual = intent.getStringExtra("USUARIO")
         if(isAccion.equals(getString(R.string.strInsertarDatos))){
             val intentInsertar = Intent(this, InsertarDatosActivity::class.java)
             intentInsertar.putExtra("accion", isAccion)
+            intentInsertar.putExtra("USUARIO", nombreUsuarioActual)
             startActivity(intentInsertar)
         }
         else if(isAccion.equals(getString(R.string.strConsultarDatos))){
             val intentConsultar = Intent(this, ConsultarDatosActivity::class.java)
             intentConsultar.putExtra("accion", isAccion)
+            intentConsultar.putExtra("USUARIO", nombreUsuarioActual)
             startActivity(intentConsultar)
         }
         else{

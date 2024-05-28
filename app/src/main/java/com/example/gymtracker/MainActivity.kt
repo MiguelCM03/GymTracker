@@ -15,10 +15,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-
     var txtCorreo: TextInputEditText? = null
     var txtContrasena: TextInputEditText? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         txtContrasena = findViewById(R.id.txtContrasena)
         txtCorreo = findViewById(R.id.txtCorreo)
+
 
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         ).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 val intentValidar = Intent(this, SeleccionAccionActivity::class.java)
+                intentValidar.putExtra("USUARIO", txtCorreo?.text.toString())
                 startActivity(intentValidar)
             } else {
                 Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_LONG).show()
