@@ -37,6 +37,13 @@ class CrearCuentaActivity : AppCompatActivity() {
 
     fun crearCuenta(){
         if(validarCorreo(txtCorreoNuevo?.text.toString()) && validarContrasena(txtContrasenaNueva?.text.toString())) {
+            var txtNombreNuevo = ""
+            for (letra in txtCorreoNuevo?.text.toString()) {
+                if (!letra.equals('@'))
+                    txtNombreNuevo += letra
+                else
+                    break
+            }//foreach
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 txtCorreoNuevo?.text.toString(),
                 txtContrasenaNueva?.text.toString()
@@ -44,6 +51,7 @@ class CrearCuentaActivity : AppCompatActivity() {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Usuario creado con éxito", Toast.LENGTH_LONG).show()
                     var intentIniciarSesionCuentaCreada = Intent(this, SeleccionAccionActivity::class.java)
+                    intentIniciarSesionCuentaCreada.putExtra("USUARIO", txtNombreNuevo)
                     startActivity(intentIniciarSesionCuentaCreada)
                 } else {
                     Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_LONG).show()
@@ -54,13 +62,19 @@ class CrearCuentaActivity : AppCompatActivity() {
     }//crearCuenta()
 
     fun insertarEnBBDD(){
-        var txtNombre = txtCorreoNuevo?.text.toString()
+        var txtNombre = ""
+        for (letra in txtCorreoNuevo?.text.toString()) {
+            if (!letra.equals('@'))
+                txtNombre += letra
+            else
+                break
+        }//foreach
         var registro = ContentValues()
         registro.put("NOMBRE",txtNombre) //registro.put(nombre del campo en bbdd, valor)
         var con = DatabaseHelper(this)
         var baseDatos = con.writableDatabase
         baseDatos.insert("USUARIOS", null, registro)
-    }
+    }//insertarEnBBDD()
 
     fun validarContrasena(isContrasena: String):Boolean{
         var tieneMinus = false

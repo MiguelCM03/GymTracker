@@ -56,8 +56,15 @@ class MainActivity : AppCompatActivity() {
             txtContrasena?.text.toString()
         ).addOnCompleteListener { it ->
             if (it.isSuccessful) {
+                var txtNombreActual = ""
+                for (letra in txtCorreoNuevo?.text.toString()) {
+                    if (!letra.equals('@'))
+                        txtNombreActual += letra
+                    else
+                        break
+                }//foreach
                 val intentValidar = Intent(this, SeleccionAccionActivity::class.java)
-                intentValidar.putExtra("USUARIO", txtCorreo?.text.toString())
+                intentValidar.putExtra("USUARIO", txtNombreActual)
                 startActivity(intentValidar)
             } else {
                 Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_LONG).show()

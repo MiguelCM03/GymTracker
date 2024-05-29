@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    android:background="@color/grisOscuro"
+    android:background="@color/verdeOscuroSuave"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CrearCuentaActivity"
     >
+
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/grisClaro"
+        android:backgroundTint="@color/verdePastel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
@@ -35,8 +36,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/negro"
-                >
-            </TextView>
+                />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -59,8 +59,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/spMesesInsertar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                >
-            </TextView>
+                />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -83,8 +82,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/spGruposInsertar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                >
-            </TextView>
+                />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -93,39 +91,64 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvGrupoInsertar"
-                app:layout_constraintBottom_toTopOf="@id/tvInsertarPeso"
+                app:layout_constraintBottom_toTopOf="@id/tvEjercicioInsertar"
                 android:entries="@array/spGrupos"
                 />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvEjercicioInsertar"
+                android:textColor="@color/negro"
+                android:text="@string/strEligeEjercicio"
+                app:layout_constraintTop_toBottomOf="@+id/spGruposInsertar"
+                app:layout_constraintBottom_toTopOf="@+id/spEjerciciosInsertar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/strInsertaPeso"
-                android:id="@+id/tvInsertarPeso"
-                app:layout_constraintTop_toBottomOf="@id/spGruposInsertar"
-                app:layout_constraintBottom_toTopOf="@id/tilInsertarPeso"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200dp"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvInsertarPeso"
+                android:textAlignment="center"
+                android:id="@+id/spEjerciciosInsertar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEjercicioInsertar"
+                app:layout_constraintBottom_toTopOf="@id/npPesoInsertar"
+                />
+
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/spEjerciciosInsertar"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/btnConfirmarAccionInsertar"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:hint="@string/strInsertaPeso"-->
+<!--                android:id="@+id/tilInsertarPeso"-->
+<!--                >-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/txtPesoInsertar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:ems="15"/>-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <NumberPicker
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/npPesoInsertar"
+                app:layout_constraintTop_toBottomOf="@+id/spEjerciciosInsertar"
                 app:layout_constraintBottom_toTopOf="@+id/btnConfirmarAccionInsertar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:hint="Correo"
-                android:id="@+id/tilInsertarPeso"
-                >
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCorreoCrearCuenta"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ems="15"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                />
 
 
 
@@ -133,14 +156,13 @@
                 android:id="@+id/btnConfirmarAccionInsertar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/amarillo"
-                android:onClick="insertarDatos"
+                android:backgroundTint="@color/lila"
                 android:text="@string/strConfirmar"
                 android:textColor="@color/negro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilInsertarPeso" />
+                app:layout_constraintTop_toBottomOf="@id/npPesoInsertar" />
 
 
 

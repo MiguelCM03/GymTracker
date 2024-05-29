@@ -14,7 +14,7 @@
     <string name="strEligeGrupo">Selecciona un grupo muscular:</string>
     <string name="strEligeEjercicio">Selecciona un ejercicio:</string>
     <string name="strEligeMes">Selecciona un mes:</string>
-    <string name="strInsertaPeso">Inserta el peso:</string>
+    <string name="strInsertaPeso">Inserta el peso (kg)</string>
     <string-array name="spMeses">
         <item>Enero</item>
         <item>Febrero</item>

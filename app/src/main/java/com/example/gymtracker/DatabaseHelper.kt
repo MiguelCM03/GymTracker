@@ -61,10 +61,10 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 var valores = ContentValues()
                 valores.put("GRUPO 1", "PIERNA")
                 db?.insert("GRUPOS", null, valores)
-//                val gruposMusculares = arrayOf(R.array.spGrupos)
-//                for(grupo in gruposMusculares){
-//                        db?.execSQL("insert into GRUPOS values(" + grupo + ");")
-//                }
+                val gruposMusculares = arrayOf(R.array.spGrupos)
+                for(grupo in gruposMusculares){
+                        db?.execSQL("insert into GRUPOS values(" + grupo + ");")
+                }
 
                 //EJERCICIOS
 
@@ -106,13 +106,7 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
         }//onCreate
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
-        }
-
-        fun insertarUsuario(db: SQLiteDatabase, nombre: String):Long{
-                val valores = ContentValues()
-                valores.put("NOMBRE", nombre)
-                return db.insert(NOMBRE_TABLA, null, valores)
-        }//insertarUsuario
+        }//onUpgrade()
 
         fun insertarRegistro(db: SQLiteDatabase, nombreUsuario: String, nombreEjercicio: String, peso: Float, ano: Int, mes: String){
                 val valoresGrupo = ContentValues()

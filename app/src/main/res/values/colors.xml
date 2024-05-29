@@ -2,7 +2,7 @@
 <resources>
     <color name="negro">#FF000000</color>
     <color name="blanco">#FFFFFFFF</color>
-    <color name="rojo">#FB0000</color>
+    <color name="rojo">#CC6D6D</color>
     <color name="azul">#2196F3</color>
     <color name="amarillo">#FFEB3B</color>
     <color name="naranja">#8F4933</color>
@@ -19,6 +19,9 @@
     <color name="moradoClaro">#5F32B6</color>
     <color name="azulSuave">#77AFDC</color>
     <color name="lila">#CDB3FF</color>
+    <color name="azulOscuroSuave">#28335E</color>
+    <color name="verdeOscuroSuave">#285E53</color>
+    <color name="verdePastel">#87FF7A</color>
 
 
 
