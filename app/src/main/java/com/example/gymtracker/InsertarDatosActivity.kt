@@ -14,7 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isEmpty
 
 class InsertarDatosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +41,9 @@ class InsertarDatosActivity : AppCompatActivity() {
 
 
         btnConfirmarInsercion.setOnClickListener {
-           // if(npPesoInsertar.isEmpty()) mostrarError()
-            /*else*/ if(insercionPosible) insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
-           // else mostrarError()
+            insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
+            if(insercionPosible) insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
+            else mostrarErrorInsercion()
         }
 
         spGruposInsertar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -132,29 +131,33 @@ class InsertarDatosActivity : AppCompatActivity() {
         var dbInsertador = woDb.writableDatabase
         var valoresInsertar = ContentValues().apply {
             put("nombre_usuario", nombreUsuario)
-            put("nombre_ejercicio", nombreEjercicioInsertar)
+            put("nombre_ejercicio", nombreEjercicioInsertar.uppercase())
             put("mes", mesInsertar)
             put("ano", anoInsertar)
             put("peso", pesoInsertar)
         }
-        try{
-            dbInsertador.execSQL("INSERT INTO REGISTROS(nombre_usuario, nombre_ejercicio, mes, ano, peso) VALUES($nombreUsuario, $nombreEjercicioInsertar, $mesInsertar, $anoInsertar, $pesoInsertar)")
-        }catch(e: SQLException){
-            mostrarError()
+        if(dbInsertador.insert("REGISTROS", null, valoresInsertar)==(-1).toLong()){
+            mostrarErrorInsercion()
+        }else{
+            mostrarMensajeCorrecto()
         }
-//        var insercion = dbInsertador.insert("REGISTROS", "id",valoresInsertar)
-//        if(insercion.toInt() ==-1){
-//            mostrarError()
-//        }
     }//insertarDatos()
 
-    fun mostrarError(){
+    fun mostrarErrorInsercion(){
         val alertaInsercionIncorrecta = AlertDialog.Builder(this)
         alertaInsercionIncorrecta.setTitle("Error")
         alertaInsercionIncorrecta.setMessage("Selecciona un grupo muscular y un ejercicio para continuar")
         alertaInsercionIncorrecta.setPositiveButton("OK", null)
         val dialogoInsercionIncorrecta: AlertDialog = alertaInsercionIncorrecta.create()
         dialogoInsercionIncorrecta.show()
-    }//mostrarError
+    }//mostrarErrorInsercion()
 
+    fun mostrarMensajeCorrecto(){
+        val alertaInsercionCorrecta = AlertDialog.Builder(this)
+        alertaInsercionCorrecta.setTitle("Insercion correcta")
+        alertaInsercionCorrecta.setMessage("Se han insertado los datos de manera correcta.")
+        alertaInsercionCorrecta.setPositiveButton("OK", null)
+        val dialogoInsercionCorrecta: AlertDialog = alertaInsercionCorrecta.create()
+        dialogoInsercionCorrecta.show()
+    }
 }

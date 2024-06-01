@@ -1,5 +1,6 @@
 package com.example.gymtracker
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class ConsultarDatosActivity : AppCompatActivity() {
 
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,8 +35,8 @@ class ConsultarDatosActivity : AppCompatActivity() {
         val btnConfirmarConsulta = findViewById<Button>(R.id.btnConfirmarAccionConsultar)
         var consultaPosible = false
 
-        btnConfirmarConsulta.setOnClickListener{
-            if(consultaPosible){
+        btnConfirmarConsulta.setOnClickListener {
+            if (consultaPosible) {
                 val intentDatosDeConsulta = Intent(this, DatosDeConsultaActivity::class.java)
 
                 var valorAnoConsultado = spAnosConsulta.selectedItem.toString()
@@ -42,17 +44,62 @@ class ConsultarDatosActivity : AppCompatActivity() {
                 var valorEjercicioConsultado = spEjerciciosConsulta.selectedItem.toString()
 
 
-
                 var dbHelperConsulta = DatabaseHelper(this)
                 var baseDeDatosConsulta = dbHelperConsulta.readableDatabase
-                var usuarioFirebase = intent.getStringExtra("USUARIO")
-                var valorPesoConsultado = baseDeDatosConsulta.execSQL("SELECT PESO FROM REGISTROS WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER($usuarioFirebase) AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER($valorEjercicioConsultado)" +
-                    "and UPPER (MES) like UPPER($valorMesConsultado) and UPPER(ANO) LIKE UPPER($valorAnoConsultado);").toString()
+                var usuarioConsulta = intent.getStringExtra("USUARIO")
+//                var valorPesoConsultado = baseDeDatosConsulta.execSQL("SELECT PESO FROM REGISTROS WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER('$usuarioFirebase') AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER('$valorEjercicioConsultado')" +
+//                    "and UPPER (MES) like UPPER('$valorMesConsultado') and ANO = $valorAnoConsultado;").toString()
+                var consulta = """
+                                SELECT PESO
+                                FROM REGISTROS 
+                                WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER(?) 
+                                AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER(?) 
+                                AND UPPER (MES) like UPPER(?) 
+                                AND ANO = ?
+                                """.trimIndent()
+
+
+                //Insercion a fuego
+                var consultaPruebaFuego = "SELECT NOMBRE FROM USUARIOS"
+                var cursorPruebaFuego = baseDeDatosConsulta.rawQuery(consultaPruebaFuego, null)
+                val listaNombresFuego = mutableListOf<String>()
+                while (cursorPruebaFuego.moveToNext()) {
+                    listaNombresFuego.add(
+                        cursorPruebaFuego.getString(
+                            cursorPruebaFuego.getColumnIndex(
+                                "nombre"
+                            )
+                        )
+                    )
+                }
+                baseDeDatosConsulta.execSQL("INSERT INTO REGISTROS  VALUES ('lucia3', 'PRENSA', 'Junio', '2024', '333')")
+
+
+                var consultaBuena = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper(?) and upper(nombre_ejercicio) like upper(?)"
+                var parametrosConsulta = arrayOf(usuarioConsulta, valorEjercicioConsultado)
+                val cursor = baseDeDatosConsulta.rawQuery(consultaBuena, parametrosConsulta)
+
+
+//                var consultaFuego = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper('lucia3') and upper(nombre_ejercicio) like upper('SENTADILLA HACK')"
+//                val usuarioFuego = "lucia3"
+//                val ejercicioFuego = "PRENSA"
+//                val mesFuego = "Junio"
+//                val anoFuego = 2024
+//                //val parametrosConsulta = arrayOf<String>(usuarioFuego, ejercicioFuego, mesFuego, anoFuego.toString())
+//                //var cursorFuego = baseDeDatosConsulta.rawQuery(consulta, parametrosFuego)
+//                var cursorFuego = baseDeDatosConsulta.rawQuery(consultaBuena, null)
+                var pesoConsulta = ""
+                try {
+                    while (cursor.moveToNext()) {
+                        pesoConsulta = cursor.getString(0)
+                    }
+                    cursor.close()
+                }catch (e: Exception){}
 
                 intentDatosDeConsulta.putExtra("ANO", valorAnoConsultado)
                 intentDatosDeConsulta.putExtra("MES", valorMesConsultado)
                 intentDatosDeConsulta.putExtra("EJERCICIO", valorEjercicioConsultado)
-                intentDatosDeConsulta.putExtra("PESO", valorPesoConsultado)
+                intentDatosDeConsulta.putExtra("PESO", pesoConsulta)
 
 
                 startActivity(intentDatosDeConsulta)

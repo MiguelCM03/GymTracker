@@ -3,12 +3,12 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import androidx.core.content.contentValuesOf
 
-class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, null, VERSION) {
+class DatabaseHelper (context: Context): SQLiteOpenHelper(context, NOMBRE_DB, null, VERSION) {
+    private val wicContext: Context = context
         companion object{
-                private const val NOMBRE_DB = "GIMNASIO"
-                private const val VERSION = 1
+                private const val NOMBRE_DB = "PRUEBA_GYM3"
+                private const val VERSION = 2
                 const val NOMBRE_TABLA = "USUARIOS"
         }
         override fun onConfigure(db: SQLiteDatabase?) {
@@ -16,96 +16,129 @@ class DatabaseHelper (context: Context?): SQLiteOpenHelper(context, NOMBRE_DB, n
                 db?.setForeignKeyConstraintsEnabled(true)
         }
         override fun onCreate(db: SQLiteDatabase?) {
-                //CREACION TABLAS
+            //CREACION TABLAS
+            // USUARIOS
+            var crearTablaUsuarios = "CREATE TABLE USUARIOS(nombre text primary key)"
+            db?.execSQL(crearTablaUsuarios)
 
-                // USUARIOS
-                var crearTablaUsuarios = "CREATE TABLE USUARIOS(nombre text primary key)"
-                db?.execSQL(crearTablaUsuarios)
+            //GRUPOS
+            var crearTablaGrupos = """
+                    create table GRUPOS(
+                    nombre text primary key
+                    );
+                    """.trimIndent()
+            db?.execSQL(crearTablaGrupos)
 
-                //GRUPOS
-                var crearTablaGrupos = """
-                        create table GRUPOS(
-                        id int primary key,
-                        nombre text
-                        );
-                        """.trimIndent()
-                db?.execSQL(crearTablaGrupos)
+            //EJERCICIOS
+            var crearTablaEjercicios = """
+                    create table EJERCICIOS(
+                    nombre text primary key,
+                    nombre_grupo text,
+                    FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE
+                    )""".trimIndent()
+            db?.execSQL(crearTablaEjercicios)
 
-                //EJERCICIOS
-                var crearTablaEjercicios = """
-                        create table EJERCICIOS(
-                        nombre text primary key,
-                        nombre_grupo,
-                        FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE)
-                        """.trimIndent()
-                db?.execSQL(crearTablaEjercicios)
-
-                //REGISTROS
-                var crearTablaRegistros = """
-                        create table REGISTROS(
-                        id int primary key /*autoincrement*/,
-                        nombre_usuario int,
-                        nombre_ejercicio int,
-                        mes text,
-                        ano integer,
-                        peso float,
-                        FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
-                        FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
-                        """.trimIndent()
-                db?.execSQL(crearTablaRegistros)
+            //REGISTROS
+            var crearTablaRegistros = """
+                    create table REGISTROS(
+                    nombre_usuario int,
+                    nombre_ejercicio int,
+                    mes text,
+                    ano integer,
+                    peso int, --real
+                    FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
+                    FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
+                    """.trimIndent()
+            db?.execSQL(crearTablaRegistros)
 
 
-                //INSERCIONES DE DATOS
 
-                //GRUPOS
-                var valores = ContentValues()
-                valores.put("GRUPO 1", "PIERNA")
-                db?.insert("GRUPOS", null, valores)
-                val gruposMusculares = arrayOf(R.array.spGrupos)
-                for(grupo in gruposMusculares){
-                        db?.execSQL("insert into GRUPOS values(" + grupo + ");")
+            //INSERCIONES DE DATOS
+
+            //GRUPOS
+            val gruposInsertar = wicContext.resources?.getStringArray(R.array.spGruposInsertar)
+            if (gruposInsertar != null) {
+                for(grupo in gruposInsertar){
+                    db?.execSQL("INSERT INTO GRUPOS VALUES('" + grupo + "')")
                 }
+            }
 
-                //EJERCICIOS
 
-                //CARDIO
-                val ejerciciosCardio = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosCardio){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"CARDIO\");")
+
+            //EJERCICIOS
+
+            //CARDIO
+            val ejerciciosCardioInsertar = wicContext.resources?.getStringArray(R.array.slEjsCardio)
+            if (ejerciciosCardioInsertar != null) {
+                for(ejercicio in ejerciciosCardioInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'CARDIO')")
                 }
+            }
 
-                //BRAZO
-                val ejerciciosBrazo = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosBrazo){
-                        db?.execSQL("insert into GRUPOS(NOMBRE) values("+ ejercicio +", \"BRAZO\");")
+            //BRAZO
+            val ejerciciosBrazoInsertar = wicContext.resources?.getStringArray(R.array.slEjsBrazo)
+            if (ejerciciosBrazoInsertar != null) {
+                for(ejercicio in ejerciciosBrazoInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'BRAZO')")
                 }
+            }
 
-                //PIERNA
-                val ejerciciosPierna = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosPierna){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"PIERNA\");")
+            //PIERNA
+            val ejerciciosPiernaInsertar = wicContext.resources?.getStringArray(R.array.slEjsPierna)
+            if (ejerciciosPiernaInsertar != null) {
+                for(ejercicio in ejerciciosPiernaInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'PIERNA')")
                 }
+            }
 
-                //TORSO
-                val ejerciciosTorso = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosTorso){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"TORSO\");")
+            //TORSO
+            val ejerciciosTorsoInsertar = wicContext.resources?.getStringArray(R.array.slEjsTorso)
+            if (ejerciciosTorsoInsertar != null) {
+                for(ejercicio in ejerciciosTorsoInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'TORSO')")
                 }
+            }
 
-                //ESPALDA
-                val ejerciciosEspalda = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosEspalda){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"ESPALDA\");")
+            //ESPALDA
+            val ejerciciosEspaldaInsertar = wicContext.resources?.getStringArray(R.array.slEjsEspalda)
+            if (ejerciciosEspaldaInsertar != null) {
+                for(ejercicio in ejerciciosEspaldaInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ESPALDA')")
                 }
+            }
 
-                //ABDOMEN
-                val ejerciciosAbdomen = arrayOf(R.array.spGrupos)
-                for(ejercicio in ejerciciosAbdomen){
-                        db?.execSQL("insert into GRUPOS values("+ ejercicio +", \"ABDOMEN\");")
+            //ABDOMEN
+            val ejerciciosAbdomenInsertar = wicContext.resources?.getStringArray(R.array.slEjsAbdomen)
+            if (ejerciciosAbdomenInsertar != null) {
+                for(ejercicio in ejerciciosAbdomenInsertar){
+                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ABDOMEN')")
                 }
+            }
+
+            try {
+                db?.execSQL("INSERT INTO USUARIOS VALUES('USUARIO_PRUEBA')")
+                db?.execSQL("INSERT INTO REGISTROS VALUES('USUARIO_PRUEBA', 'PRENSA', 'ABRIL', 2022, 100)")
+            }catch(e: Exception){
+                e.printStackTrace()
+            }
+
+            //FIN INSERTS
+
         }//onCreate
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+            //REGISTROS
+            db?.execSQL("DROP TABLE IF EXISTS REGISTROS")
+            var crearTablaRegistros = """
+                    create table REGISTROS(
+                    nombre_usuario int,
+                    nombre_ejercicio int,
+                    mes text,
+                    ano text,
+                    peso text,
+                    FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
+                    FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
+                    """.trimIndent()
+            db?.execSQL(crearTablaRegistros)
         }//onUpgrade()
 
         fun insertarRegistro(db: SQLiteDatabase, nombreUsuario: String, nombreEjercicio: String, peso: Float, ano: Int, mes: String){

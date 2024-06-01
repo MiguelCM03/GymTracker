@@ -15,8 +15,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    var txtCorreo: TextInputEditText? = null
-    var txtContrasena: TextInputEditText? = null
+    var txtCorreoLogin: TextInputEditText? = null
+    var txtContrasenaLogin: TextInputEditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        txtContrasena = findViewById(R.id.txtContrasena)
-        txtCorreo = findViewById(R.id.txtCorreo)
+        txtContrasenaLogin = findViewById(R.id.txtContrasena)
+        txtCorreoLogin = findViewById(R.id.txtCorreoLogin)
 
 
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
@@ -52,17 +52,19 @@ class MainActivity : AppCompatActivity() {
 
     fun validarCuenta(){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(
-            txtCorreo?.text.toString(),
-            txtContrasena?.text.toString()
+            txtCorreoLogin?.text.toString(),
+            txtContrasenaLogin?.text.toString()
         ).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 var txtNombreActual = ""
-                for (letra in txtCorreoNuevo?.text.toString()) {
+                for (letra in txtCorreoLogin?.text.toString()) {
                     if (!letra.equals('@'))
                         txtNombreActual += letra
                     else
                         break
                 }//foreach
+                var dbPrueba = DatabaseHelper(this)
+                var bbddPrueba = dbPrueba.readableDatabase
                 val intentValidar = Intent(this, SeleccionAccionActivity::class.java)
                 intentValidar.putExtra("USUARIO", txtNombreActual)
                 startActivity(intentValidar)

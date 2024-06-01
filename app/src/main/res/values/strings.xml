@@ -53,6 +53,14 @@
         <item>Abdomen</item>
         <item>Espalda</item>
     </string-array>
+    <string-array name="spGruposInsertar">
+        <item>BRAZO</item>
+        <item>PIERNA</item>
+        <item>TORSO</item>
+        <item>CARDIO</item>
+        <item>ABDOMEN</item>
+        <item>ESPALDA</item>
+    </string-array>
     <string-array name="emptyArray">
         <item></item>
     </string-array>
