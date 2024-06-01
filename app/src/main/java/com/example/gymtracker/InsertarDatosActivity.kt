@@ -41,9 +41,11 @@ class InsertarDatosActivity : AppCompatActivity() {
 
 
         btnConfirmarInsercion.setOnClickListener {
-            insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
-            if(insercionPosible) insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
-            else mostrarErrorInsercion()
+//            insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
+            if(insercionPosible)
+                insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
+            else
+                mostrarErrorInsercion()
         }
 
         spGruposInsertar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

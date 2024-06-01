@@ -49,35 +49,33 @@ class ConsultarDatosActivity : AppCompatActivity() {
                 var usuarioConsulta = intent.getStringExtra("USUARIO")
 //                var valorPesoConsultado = baseDeDatosConsulta.execSQL("SELECT PESO FROM REGISTROS WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER('$usuarioFirebase') AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER('$valorEjercicioConsultado')" +
 //                    "and UPPER (MES) like UPPER('$valorMesConsultado') and ANO = $valorAnoConsultado;").toString()
-                var consulta = """
-                                SELECT PESO
-                                FROM REGISTROS 
-                                WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER(?) 
-                                AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER(?) 
-                                AND UPPER (MES) like UPPER(?) 
-                                AND ANO = ?
-                                """.trimIndent()
+//                var consulta = """
+//                                SELECT PESO
+//                                FROM REGISTROS
+//                                WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER(?)
+//                                AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER(?)
+//                                AND UPPER (MES) like UPPER(?)
+//                                AND ANO = ?
+//                                """.trimIndent()
 
 
                 //Insercion a fuego
-                var consultaPruebaFuego = "SELECT NOMBRE FROM USUARIOS"
-                var cursorPruebaFuego = baseDeDatosConsulta.rawQuery(consultaPruebaFuego, null)
-                val listaNombresFuego = mutableListOf<String>()
-                while (cursorPruebaFuego.moveToNext()) {
-                    listaNombresFuego.add(
-                        cursorPruebaFuego.getString(
-                            cursorPruebaFuego.getColumnIndex(
-                                "nombre"
-                            )
-                        )
-                    )
-                }
-                baseDeDatosConsulta.execSQL("INSERT INTO REGISTROS  VALUES ('lucia3', 'PRENSA', 'Junio', '2024', '333')")
+//                var consultaPruebaFuego = "SELECT NOMBRE FROM USUARIOS"
+//                var cursorPruebaFuego = baseDeDatosConsulta.rawQuery(consultaPruebaFuego, null)
+//                val listaNombresFuego = mutableListOf<String>()
+//                while (cursorPruebaFuego.moveToNext()) {
+//                    listaNombresFuego.add(
+//                        cursorPruebaFuego.getString(
+//                            cursorPruebaFuego.getColumnIndex(
+//                                "nombre"
+//                            )
+//                        )
+//                    )
+//                }
+//                baseDeDatosConsulta.execSQL("INSERT INTO REGISTROS  VALUES ('lucia3', 'PRENSA', 'Junio', '2024', '333')")
 
 
-                var consultaBuena = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper(?) and upper(nombre_ejercicio) like upper(?)"
-                var parametrosConsulta = arrayOf(usuarioConsulta, valorEjercicioConsultado)
-                val cursor = baseDeDatosConsulta.rawQuery(consultaBuena, parametrosConsulta)
+
 
 
 //                var consultaFuego = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper('lucia3') and upper(nombre_ejercicio) like upper('SENTADILLA HACK')"
@@ -88,6 +86,11 @@ class ConsultarDatosActivity : AppCompatActivity() {
 //                //val parametrosConsulta = arrayOf<String>(usuarioFuego, ejercicioFuego, mesFuego, anoFuego.toString())
 //                //var cursorFuego = baseDeDatosConsulta.rawQuery(consulta, parametrosFuego)
 //                var cursorFuego = baseDeDatosConsulta.rawQuery(consultaBuena, null)
+
+                var consultaBuena = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper(?) and upper(nombre_ejercicio) like upper(?) and upper(mes) like upper(?) and upper (ano) like upper(?)"
+                var parametrosConsulta = arrayOf(usuarioConsulta, valorEjercicioConsultado, valorMesConsultado, valorAnoConsultado)
+                val cursor = baseDeDatosConsulta.rawQuery(consultaBuena, parametrosConsulta)
+
                 var pesoConsulta = ""
                 try {
                     while (cursor.moveToNext()) {
@@ -96,13 +99,22 @@ class ConsultarDatosActivity : AppCompatActivity() {
                     cursor.close()
                 }catch (e: Exception){}
 
-                intentDatosDeConsulta.putExtra("ANO", valorAnoConsultado)
-                intentDatosDeConsulta.putExtra("MES", valorMesConsultado)
-                intentDatosDeConsulta.putExtra("EJERCICIO", valorEjercicioConsultado)
-                intentDatosDeConsulta.putExtra("PESO", pesoConsulta)
+                if(pesoConsulta.equals("")){
+                    val alertaNoHayDatos = AlertDialog.Builder(this)
+                    alertaNoHayDatos.setTitle("Aviso")
+                    alertaNoHayDatos.setMessage("No hay datos para esa búsqueda")
+                    alertaNoHayDatos.setPositiveButton("OK", null)
+                    val dialogoNoHayDatos: AlertDialog = alertaNoHayDatos.create()
+                    dialogoNoHayDatos.show()
+                }else{
+                    intentDatosDeConsulta.putExtra("ANO", valorAnoConsultado)
+                    intentDatosDeConsulta.putExtra("MES", valorMesConsultado)
+                    intentDatosDeConsulta.putExtra("EJERCICIO", valorEjercicioConsultado)
+                    intentDatosDeConsulta.putExtra("PESO", pesoConsulta)
 
+                    startActivity(intentDatosDeConsulta)
+                }
 
-                startActivity(intentDatosDeConsulta)
             }else{
                 val alertaEjercicioNoSeleccionado = AlertDialog.Builder(this)
                 alertaEjercicioNoSeleccionado.setTitle("Error")
