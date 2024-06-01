@@ -47,59 +47,21 @@ class ConsultarDatosActivity : AppCompatActivity() {
                 var dbHelperConsulta = DatabaseHelper(this)
                 var baseDeDatosConsulta = dbHelperConsulta.readableDatabase
                 var usuarioConsulta = intent.getStringExtra("USUARIO")
-//                var valorPesoConsultado = baseDeDatosConsulta.execSQL("SELECT PESO FROM REGISTROS WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER('$usuarioFirebase') AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER('$valorEjercicioConsultado')" +
-//                    "and UPPER (MES) like UPPER('$valorMesConsultado') and ANO = $valorAnoConsultado;").toString()
-//                var consulta = """
-//                                SELECT PESO
-//                                FROM REGISTROS
-//                                WHERE UPPER(NOMBRE_USUARIO) LIKE UPPER(?)
-//                                AND UPPER(NOMBRE_EJERCICIO) LIKE UPPER(?)
-//                                AND UPPER (MES) like UPPER(?)
-//                                AND ANO = ?
-//                                """.trimIndent()
-
-
-                //Insercion a fuego
-//                var consultaPruebaFuego = "SELECT NOMBRE FROM USUARIOS"
-//                var cursorPruebaFuego = baseDeDatosConsulta.rawQuery(consultaPruebaFuego, null)
-//                val listaNombresFuego = mutableListOf<String>()
-//                while (cursorPruebaFuego.moveToNext()) {
-//                    listaNombresFuego.add(
-//                        cursorPruebaFuego.getString(
-//                            cursorPruebaFuego.getColumnIndex(
-//                                "nombre"
-//                            )
-//                        )
-//                    )
-//                }
-//                baseDeDatosConsulta.execSQL("INSERT INTO REGISTROS  VALUES ('lucia3', 'PRENSA', 'Junio', '2024', '333')")
-
-
-
-
-
-//                var consultaFuego = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper('lucia3') and upper(nombre_ejercicio) like upper('SENTADILLA HACK')"
-//                val usuarioFuego = "lucia3"
-//                val ejercicioFuego = "PRENSA"
-//                val mesFuego = "Junio"
-//                val anoFuego = 2024
-//                //val parametrosConsulta = arrayOf<String>(usuarioFuego, ejercicioFuego, mesFuego, anoFuego.toString())
-//                //var cursorFuego = baseDeDatosConsulta.rawQuery(consulta, parametrosFuego)
-//                var cursorFuego = baseDeDatosConsulta.rawQuery(consultaBuena, null)
 
                 var consultaBuena = "SELECT PESO FROM REGISTROS WHERE upper(nombre_usuario) like upper(?) and upper(nombre_ejercicio) like upper(?) and upper(mes) like upper(?) and upper (ano) like upper(?)"
                 var parametrosConsulta = arrayOf(usuarioConsulta, valorEjercicioConsultado, valorMesConsultado, valorAnoConsultado)
                 val cursor = baseDeDatosConsulta.rawQuery(consultaBuena, parametrosConsulta)
 
-                var pesoConsulta = ""
+                var pesos: MutableList<String> = mutableListOf()
                 try {
                     while (cursor.moveToNext()) {
-                        pesoConsulta = cursor.getString(0)
+//                        pesoConsulta = cursor.getString(0)
+                        pesos.add(cursor.getString(0))
                     }
                     cursor.close()
                 }catch (e: Exception){}
 
-                if(pesoConsulta.equals("")){
+                if(pesos.equals("")){
                     val alertaNoHayDatos = AlertDialog.Builder(this)
                     alertaNoHayDatos.setTitle("Aviso")
                     alertaNoHayDatos.setMessage("No hay datos para esa búsqueda")
@@ -107,10 +69,13 @@ class ConsultarDatosActivity : AppCompatActivity() {
                     val dialogoNoHayDatos: AlertDialog = alertaNoHayDatos.create()
                     dialogoNoHayDatos.show()
                 }else{
+                    val pesosConsultados = pesos.toTypedArray()
+                    val arrayPrueba = arrayOf("2", "3", "44", "55")
                     intentDatosDeConsulta.putExtra("ANO", valorAnoConsultado)
                     intentDatosDeConsulta.putExtra("MES", valorMesConsultado)
                     intentDatosDeConsulta.putExtra("EJERCICIO", valorEjercicioConsultado)
-                    intentDatosDeConsulta.putExtra("PESO", pesoConsulta)
+
+                    intentDatosDeConsulta.putExtra("PESO", pesosConsultados)
 
                     startActivity(intentDatosDeConsulta)
                 }

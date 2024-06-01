@@ -25,10 +25,24 @@ class DatosDeConsultaActivity : AppCompatActivity() {
         val anoConsultado = intent.getStringExtra("ANO")
         val mesConsultado = intent.getStringExtra("MES")
         val ejercicioConsultado = intent.getStringExtra("EJERCICIO")
-        val pesoConsultado = intent.getStringExtra("PESO")
+        val pesoConsultado =  intent.getStringArrayExtra("PESO")
+
         tvValorMesConsultado.setText(mesConsultado)
         tvValorEjercicioConsultado.setText(ejercicioConsultado)
         tvValorAnoConsultado.setText(anoConsultado)
-        tvValorPesoConsultado.setText(pesoConsultado)
+
+        var textoPesos = ""
+        if (pesoConsultado != null) {
+            var contador = 0
+            while(contador<pesoConsultado.size){
+                textoPesos += pesoConsultado[contador]
+                textoPesos += ", "
+                contador ++
+            }
+        }
+        if(textoPesos.length>0) {
+            var textoPesosMostrado = textoPesos.substring(0, textoPesos.length - 2)
+            tvValorPesoConsultado.setText(textoPesosMostrado)
+        }
     }
 }
