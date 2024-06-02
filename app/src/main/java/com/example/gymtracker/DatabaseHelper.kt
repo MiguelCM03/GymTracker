@@ -44,8 +44,8 @@ class DatabaseHelper (context: Context): SQLiteOpenHelper(context, NOMBRE_DB, nu
                     nombre_usuario int,
                     nombre_ejercicio int,
                     mes text,
-                    ano integer,
-                    peso int, --real
+                    ano text,
+                    peso text,
                     FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
                     FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
                     """.trimIndent()
@@ -126,37 +126,6 @@ class DatabaseHelper (context: Context): SQLiteOpenHelper(context, NOMBRE_DB, nu
 
         }//onCreate
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-            //REGISTROS
-            db?.execSQL("DROP TABLE IF EXISTS REGISTROS")
-            var crearTablaRegistros = """
-                    create table REGISTROS(
-                    nombre_usuario int,
-                    nombre_ejercicio int,
-                    mes text,
-                    ano text,
-                    peso text,
-                    FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
-                    FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
-                    """.trimIndent()
-            db?.execSQL(crearTablaRegistros)
+
         }//onUpgrade()
-
-        fun insertarRegistro(db: SQLiteDatabase, nombreUsuario: String, nombreEjercicio: String, peso: Float, ano: Int, mes: String){
-                val valoresGrupo = ContentValues()
-                valoresGrupo.put("NOMBRE", "Grupo de prueba")
-
-                val valoresEjercicio = ContentValues()
-                valoresEjercicio.put("NOMBRE", "Ejercicio de prueba")
-                valoresEjercicio.put("NOMBRE_GRUPO", "Grupo de prueba")
-
-                val valores = ContentValues()
-                valores.put("nombre_usuario", nombreUsuario)
-                valores.put("nombre_ejercicio", nombreEjercicio)
-                valores.put("peso", peso)
-                valores.put("ano", ano)
-                valores.put("mes", mes)
-                db.insert("REGISTROS", null, valores)
-        }
-
-
 }

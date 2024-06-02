@@ -70,7 +70,7 @@ class CrearCuentaActivity : AppCompatActivity() {
                 break
         }//foreach
         var registro = ContentValues()
-        registro.put("NOMBRE",txtNombre) //registro.put(nombre del campo en bbdd, valor)
+        registro.put("NOMBRE",txtNombre)
         var con = DatabaseHelper(this)
         var baseDatos = con.writableDatabase
         baseDatos.insert("USUARIOS", null, registro)

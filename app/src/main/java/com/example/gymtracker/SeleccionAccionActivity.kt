@@ -31,13 +31,7 @@ class SeleccionAccionActivity : AppCompatActivity() {
         btnInsertar.setOnClickListener(){
             seleccionarAccion(btnInsertar.text.toString().trim())
         }
-
-        //var btnConfirmar = findViewById<Button>(R.id.btnConfirmar)
-
-
     }//onCreate
-
-
 
     fun seleccionarAccion(isAccion: String){
         val nombreUsuarioActual = intent.getStringExtra("USUARIO")
@@ -61,6 +55,5 @@ class SeleccionAccionActivity : AppCompatActivity() {
             val dialogoSeleccionAccion: AlertDialog = alertaSeleccionAccion.create()
             dialogoSeleccionAccion.show()
         }
-    }
-
+    }//seleccionarAccion()
 }

@@ -55,7 +55,6 @@ class ConsultarDatosActivity : AppCompatActivity() {
                 var pesos: MutableList<String> = mutableListOf()
                 try {
                     while (cursor.moveToNext()) {
-//                        pesoConsulta = cursor.getString(0)
                         pesos.add(cursor.getString(0))
                     }
                     cursor.close()
@@ -137,9 +136,7 @@ class ConsultarDatosActivity : AppCompatActivity() {
                 }
             }//onItemSelected()
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Opcional: Puedes hacer algo si no se selecciona nada
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }//onItemSelectedListener()
 
     }//onCreate
