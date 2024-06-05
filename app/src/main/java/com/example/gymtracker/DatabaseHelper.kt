@@ -6,126 +6,120 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DatabaseHelper (context: Context): SQLiteOpenHelper(context, NOMBRE_DB, null, VERSION) {
     private val wicContext: Context = context
-        companion object{
-                private const val NOMBRE_DB = "PRUEBA_GYM3"
-                private const val VERSION = 2
-                const val NOMBRE_TABLA = "USUARIOS"
+    companion object{
+            private const val NOMBRE_DB = "PRUEBA_GYM3"
+            private const val VERSION = 2
+    }
+    override fun onConfigure(db: SQLiteDatabase?) {
+            super.onConfigure(db)
+            db?.setForeignKeyConstraintsEnabled(true)
+    }
+    override fun onCreate(db: SQLiteDatabase?) {
+        //CREACION TABLAS
+        // USUARIOS
+        var crearTablaUsuarios = "CREATE TABLE USUARIOS(nombre text primary key)"
+        db?.execSQL(crearTablaUsuarios)
+
+        //GRUPOS
+        var crearTablaGrupos = """
+                create table GRUPOS(
+                nombre text primary key
+                );
+                """.trimIndent()
+        db?.execSQL(crearTablaGrupos)
+
+        //EJERCICIOS
+        var crearTablaEjercicios = """
+                create table EJERCICIOS(
+                nombre text primary key,
+                nombre_grupo text,
+                FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE
+                )""".trimIndent()
+        db?.execSQL(crearTablaEjercicios)
+
+        //REGISTROS
+        var crearTablaRegistros = """
+                create table REGISTROS(
+                nombre_usuario int,
+                nombre_ejercicio int,
+                mes text,
+                ano text,
+                peso text,
+                FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
+                FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
+                """.trimIndent()
+        db?.execSQL(crearTablaRegistros)
+
+        //INSERCIONES DE DATOS
+
+        //GRUPOS
+        val gruposInsertar = wicContext.resources?.getStringArray(R.array.spGruposInsertar)
+        if (gruposInsertar != null) {
+            for(grupo in gruposInsertar){
+                db?.execSQL("INSERT INTO GRUPOS VALUES('" + grupo + "')")
+            }
         }
-        override fun onConfigure(db: SQLiteDatabase?) {
-                super.onConfigure(db)
-                db?.setForeignKeyConstraintsEnabled(true)
+
+        //EJERCICIOS
+
+        //CARDIO
+        val ejerciciosCardioInsertar = wicContext.resources?.getStringArray(R.array.slEjsCardio)
+        if (ejerciciosCardioInsertar != null) {
+            for(ejercicio in ejerciciosCardioInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'CARDIO')")
+            }
         }
-        override fun onCreate(db: SQLiteDatabase?) {
-            //CREACION TABLAS
-            // USUARIOS
-            var crearTablaUsuarios = "CREATE TABLE USUARIOS(nombre text primary key)"
-            db?.execSQL(crearTablaUsuarios)
 
-            //GRUPOS
-            var crearTablaGrupos = """
-                    create table GRUPOS(
-                    nombre text primary key
-                    );
-                    """.trimIndent()
-            db?.execSQL(crearTablaGrupos)
-
-            //EJERCICIOS
-            var crearTablaEjercicios = """
-                    create table EJERCICIOS(
-                    nombre text primary key,
-                    nombre_grupo text,
-                    FOREIGN KEY(nombre_grupo) REFERENCES GRUPOS(nombre) ON DELETE CASCADE
-                    )""".trimIndent()
-            db?.execSQL(crearTablaEjercicios)
-
-            //REGISTROS
-            var crearTablaRegistros = """
-                    create table REGISTROS(
-                    nombre_usuario int,
-                    nombre_ejercicio int,
-                    mes text,
-                    ano text,
-                    peso text,
-                    FOREIGN KEY(nombre_usuario) REFERENCES USUARIOS(nombre) ON DELETE CASCADE,
-                    FOREIGN KEY(nombre_ejercicio) REFERENCES EJERCICIOS(nombre) ON DELETE CASCADE)
-                    """.trimIndent()
-            db?.execSQL(crearTablaRegistros)
-
-
-
-            //INSERCIONES DE DATOS
-
-            //GRUPOS
-            val gruposInsertar = wicContext.resources?.getStringArray(R.array.spGruposInsertar)
-            if (gruposInsertar != null) {
-                for(grupo in gruposInsertar){
-                    db?.execSQL("INSERT INTO GRUPOS VALUES('" + grupo + "')")
-                }
+        //BRAZO
+        val ejerciciosBrazoInsertar = wicContext.resources?.getStringArray(R.array.slEjsBrazo)
+        if (ejerciciosBrazoInsertar != null) {
+            for(ejercicio in ejerciciosBrazoInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'BRAZO')")
             }
+        }
 
-
-
-            //EJERCICIOS
-
-            //CARDIO
-            val ejerciciosCardioInsertar = wicContext.resources?.getStringArray(R.array.slEjsCardio)
-            if (ejerciciosCardioInsertar != null) {
-                for(ejercicio in ejerciciosCardioInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'CARDIO')")
-                }
+        //PIERNA
+        val ejerciciosPiernaInsertar = wicContext.resources?.getStringArray(R.array.slEjsPierna)
+        if (ejerciciosPiernaInsertar != null) {
+            for(ejercicio in ejerciciosPiernaInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'PIERNA')")
             }
+        }
 
-            //BRAZO
-            val ejerciciosBrazoInsertar = wicContext.resources?.getStringArray(R.array.slEjsBrazo)
-            if (ejerciciosBrazoInsertar != null) {
-                for(ejercicio in ejerciciosBrazoInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'BRAZO')")
-                }
+        //TORSO
+        val ejerciciosTorsoInsertar = wicContext.resources?.getStringArray(R.array.slEjsTorso)
+        if (ejerciciosTorsoInsertar != null) {
+            for(ejercicio in ejerciciosTorsoInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'TORSO')")
             }
+        }
 
-            //PIERNA
-            val ejerciciosPiernaInsertar = wicContext.resources?.getStringArray(R.array.slEjsPierna)
-            if (ejerciciosPiernaInsertar != null) {
-                for(ejercicio in ejerciciosPiernaInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'PIERNA')")
-                }
+        //ESPALDA
+        val ejerciciosEspaldaInsertar = wicContext.resources?.getStringArray(R.array.slEjsEspalda)
+        if (ejerciciosEspaldaInsertar != null) {
+            for(ejercicio in ejerciciosEspaldaInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ESPALDA')")
             }
+        }
 
-            //TORSO
-            val ejerciciosTorsoInsertar = wicContext.resources?.getStringArray(R.array.slEjsTorso)
-            if (ejerciciosTorsoInsertar != null) {
-                for(ejercicio in ejerciciosTorsoInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'TORSO')")
-                }
+        //ABDOMEN
+        val ejerciciosAbdomenInsertar = wicContext.resources?.getStringArray(R.array.slEjsAbdomen)
+        if (ejerciciosAbdomenInsertar != null) {
+            for(ejercicio in ejerciciosAbdomenInsertar){
+                db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ABDOMEN')")
             }
+        }
 
-            //ESPALDA
-            val ejerciciosEspaldaInsertar = wicContext.resources?.getStringArray(R.array.slEjsEspalda)
-            if (ejerciciosEspaldaInsertar != null) {
-                for(ejercicio in ejerciciosEspaldaInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ESPALDA')")
-                }
-            }
+        try {
+            db?.execSQL("INSERT INTO USUARIOS VALUES('USUARIO_PRUEBA')")
+            db?.execSQL("INSERT INTO REGISTROS VALUES('USUARIO_PRUEBA', 'PRENSA', 'ABRIL', 2022, 100)")
+        }catch(e: Exception){
+            e.printStackTrace()
+        }
 
-            //ABDOMEN
-            val ejerciciosAbdomenInsertar = wicContext.resources?.getStringArray(R.array.slEjsAbdomen)
-            if (ejerciciosAbdomenInsertar != null) {
-                for(ejercicio in ejerciciosAbdomenInsertar){
-                    db?.execSQL("INSERT INTO EJERCICIOS VALUES('" + ejercicio + "', 'ABDOMEN')")
-                }
-            }
+        //FIN INSERTS
 
-            try {
-                db?.execSQL("INSERT INTO USUARIOS VALUES('USUARIO_PRUEBA')")
-                db?.execSQL("INSERT INTO REGISTROS VALUES('USUARIO_PRUEBA', 'PRENSA', 'ABRIL', 2022, 100)")
-            }catch(e: Exception){
-                e.printStackTrace()
-            }
-
-            //FIN INSERTS
-
-        }//onCreate
-        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
-        }//onUpgrade()
+    }//onCreate
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+    }//onUpgrade()
 }

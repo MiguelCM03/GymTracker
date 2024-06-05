@@ -134,4 +134,7 @@
     <string name="strEjercicio">Ejercicio: </string>
     <string name="strTituloConsulta">Resultados de la búsqueda: </string>
     <string name="strPeso">Peso: </string>
+    <string name="strMinutos">Minutos: </string>
+    <string name="strEsperandoSeleccionGrupo">Esperando grupo muscular...</string>
+    <string name="strInserteMinutos">Inserte los minutos:</string>
 </resources>

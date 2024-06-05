@@ -9,11 +9,13 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.w3c.dom.Text
 
 class InsertarDatosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,6 @@ class InsertarDatosActivity : AppCompatActivity() {
 
 
         btnConfirmarInsercion.setOnClickListener {
-//            insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
             if(insercionPosible)
                 insertarDatos(spEjerciciosInsertar.selectedItem.toString(), spAnosInsertar.selectedItem.toString(), spMesesInsertar.selectedItem.toString(), npPesoInsertar.value.toFloat())
             else
@@ -55,7 +56,9 @@ class InsertarDatosActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                val txtInsertarPeso = findViewById<TextView>(R.id.txtInsertarPeso)
                 if (position == 0) {//NADA
+                    txtInsertarPeso.setText(getString(R.string.strEsperandoSeleccionGrupo))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.emptyArray,
@@ -65,6 +68,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = false
                 } else if (position == 1) {//BRAZO
+                    txtInsertarPeso.setText(getString(R.string.strInsertaPeso))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsBrazo,
@@ -74,6 +78,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = true
                 } else if (position == 2) {//PIERNA
+                    txtInsertarPeso.setText(getString(R.string.strInsertaPeso))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsPierna,
@@ -83,6 +88,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = true
                 } else if (position == 3) {//TORSO
+                    txtInsertarPeso.setText(getString(R.string.strInsertaPeso))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsTorso,
@@ -92,6 +98,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = true
                 } else if (position == 4) {//CARDIO
+                    txtInsertarPeso.setText(getString(R.string.strInserteMinutos))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsCardio,
@@ -101,6 +108,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = true
                 } else if (position == 5) {//ABDOMEN
+                    txtInsertarPeso.setText(getString(R.string.strInsertaPeso))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsAbdomen,
@@ -110,6 +118,7 @@ class InsertarDatosActivity : AppCompatActivity() {
                     spEjerciciosInsertar.adapter = adaptador
                     insercionPosible = true
                 } else if (position == 6) {//ESPALDA
+                    txtInsertarPeso.setText(getString(R.string.strInsertaPeso))
                     val adaptador = ArrayAdapter.createFromResource(
                         contextoInsercion,
                         R.array.slEjsEspalda,

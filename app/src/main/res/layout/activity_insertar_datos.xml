@@ -116,41 +116,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvEjercicioInsertar"
-                app:layout_constraintBottom_toTopOf="@id/npPesoInsertar"
+                app:layout_constraintBottom_toTopOf="@id/txtInsertarPeso"
                 />
 
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="200dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/spEjerciciosInsertar"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/btnConfirmarAccionInsertar"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:hint="@string/strInsertaPeso"-->
-<!--                android:id="@+id/tilInsertarPeso"-->
-<!--                >-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/txtPesoInsertar"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:ems="15"/>-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtInsertarPeso"
+                app:layout_constraintTop_toBottomOf="@id/spEjerciciosInsertar"
+                app:layout_constraintBottom_toTopOf="@id/npPesoInsertar"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/strEsperandoSeleccionGrupo"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <NumberPicker
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/npPesoInsertar"
-                app:layout_constraintTop_toBottomOf="@+id/spEjerciciosInsertar"
+                app:layout_constraintTop_toBottomOf="@+id/txtInsertarPeso"
                 app:layout_constraintBottom_toTopOf="@+id/btnConfirmarAccionInsertar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 
                 />
-
-
 
             <Button
                 android:id="@+id/btnConfirmarAccionInsertar"

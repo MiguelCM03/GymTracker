@@ -21,11 +21,17 @@ class DatosDeConsultaActivity : AppCompatActivity() {
         val tvValorEjercicioConsultado = findViewById<TextView>(R.id.tvValorEjercicioConsultado)
         val tvValorAnoConsultado = findViewById<TextView>(R.id.tvValorAnoConsultado)
         val tvValorPesoConsultado = findViewById<TextView>(R.id.tvValorPesoConsultado)
+        val tvPesoConsultado = findViewById<TextView>(R.id.tvPesoConsultado)
+
+        if(intent.getStringExtra("MEDIDA").equals("MINUTOS")){
+            tvPesoConsultado.setText(getString(R.string.strMinutos))
+        }
 
         val anoConsultado = intent.getStringExtra("ANO")
         val mesConsultado = intent.getStringExtra("MES")
         val ejercicioConsultado = intent.getStringExtra("EJERCICIO")
         val pesoConsultado =  intent.getStringArrayExtra("PESO")
+
 
         tvValorMesConsultado.setText(mesConsultado)
         tvValorEjercicioConsultado.setText(ejercicioConsultado)
