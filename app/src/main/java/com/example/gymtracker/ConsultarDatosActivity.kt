@@ -61,7 +61,7 @@ class ConsultarDatosActivity : AppCompatActivity() {
                     cursor.close()
                 }catch (e: Exception){}
 
-                if(pesos.equals("")){
+                if(pesos.size==0){
                     val alertaNoHayDatos = AlertDialog.Builder(this)
                     alertaNoHayDatos.setTitle("Aviso")
                     alertaNoHayDatos.setMessage("No hay datos para esa búsqueda")

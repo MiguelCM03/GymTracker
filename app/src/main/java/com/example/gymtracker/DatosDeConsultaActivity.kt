@@ -1,11 +1,14 @@
 package com.example.gymtracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 class DatosDeConsultaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +25,7 @@ class DatosDeConsultaActivity : AppCompatActivity() {
         val tvValorAnoConsultado = findViewById<TextView>(R.id.tvValorAnoConsultado)
         val tvValorPesoConsultado = findViewById<TextView>(R.id.tvValorPesoConsultado)
         val tvPesoConsultado = findViewById<TextView>(R.id.tvPesoConsultado)
+
 
         if(intent.getStringExtra("MEDIDA").equals("MINUTOS")){
             tvPesoConsultado.setText(getString(R.string.strMinutos))
