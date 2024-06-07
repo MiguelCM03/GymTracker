@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azulOscuro"
+    android:background="@color/azulOscuroSuave"
     tools:context=".CrearCuentaActivity">
 
     <androidx.cardview.widget.CardView
@@ -41,8 +41,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/strTituloConsulta"
-                    android:background="@color/azulOscuro"
-                    android:textColor="@color/azulCielo"
+                    android:background="@color/lila"
+                    android:textColor="@color/azulOscuroSuave"
                     android:textSize="21sp"
                     />
 

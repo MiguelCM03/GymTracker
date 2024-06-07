@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    android:background="@color/azulOscuro"
+    android:background="@color/azulOscuroSuave"
     >
 
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/azul"
+        android:backgroundTint="@color/azulSuave"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
@@ -104,7 +104,7 @@
                 android:layout_marginBottom="35dp"
                 android:text="@string/btnIniciarSesion"
                 android:backgroundTint="@color/amarillo"
-                android:textColor="@color/marron"
+                android:textColor="@color/azulOscuro"
                 />
 
             <TextView
